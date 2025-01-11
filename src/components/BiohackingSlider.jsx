@@ -32,7 +32,7 @@ const solutions = [
 
 const BiohackingSlider = () => {
   return (
-    <section className="py-12 sm:py-16 bg-gray-900/50 backdrop-blur-lg">
+    <section className="pt-24 pb-12 sm:pt-32 sm:pb-16 bg-gray-900/50 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2 
           className="hero-title text-4xl md:text-5xl font-bold text-center mb-12"
