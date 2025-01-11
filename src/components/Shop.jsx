@@ -247,13 +247,8 @@ const Shop = () => {
                 </div>
 
                 <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center mb-4">
                     <span className="text-3xl">{product.icon}</span>
-                    <div className="flex items-center">
-                      <span className="text-yellow-400">★</span>
-                      <span className="text-white ml-1">{product.rating}</span>
-                      <span className="text-gray-400 text-sm ml-1">({product.reviews})</span>
-                    </div>
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">{product.name}</h3>
                   <p className="text-gray-400 mb-4">{product.description}</p>
