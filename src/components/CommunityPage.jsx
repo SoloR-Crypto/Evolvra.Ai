@@ -45,13 +45,14 @@ const CommunityPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 pt-24 pb-12">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 pt-24 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div 
-          className="bg-gray-800/40 rounded-xl p-8 mb-8"
+          className="glass-card rounded-xl p-12 mb-8 border-2 border-gray-700/30 shadow-xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
           <div className="flex items-center space-x-4 mb-4">
             <span className="text-4xl">{community.icon}</span>

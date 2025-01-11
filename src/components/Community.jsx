@@ -138,10 +138,13 @@ const Community = () => {
               className="block"
             >
               <motion.div
-                className="bg-gray-800/40 rounded-xl overflow-hidden border border-gray-700/50 hover:border-primary-500/50 transition-all duration-300 h-full flex flex-col"
+                className="glass-card rounded-xl overflow-hidden border-2 border-gray-700/30 hover:border-primary-400/50 transition-all duration-500 h-full flex flex-col shadow-lg hover:shadow-2xl hover:shadow-primary-500/10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ 
+                  scale: 1.02,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
               >
                 <div className="relative h-48 bg-gradient-to-br from-gray-700 to-gray-900">
                   <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-sm text-white">
