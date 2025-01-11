@@ -7,6 +7,7 @@ import BiohackingSlider from './components/BiohackingSlider'
 import Footer from './components/Footer'
 import Community from './components/Community'
 import CommunityPage from './components/CommunityPage'
+import Shop from './components/Shop'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           } />
           <Route path="/community" element={<Community />} />
           <Route path="/community/:slug" element={<CommunityPage />} />
+          <Route path="/shop" element={<Shop />} />
         </Routes>
         <Footer />
       </div>
