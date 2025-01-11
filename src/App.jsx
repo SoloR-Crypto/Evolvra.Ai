@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import Community from './components/Community'
 import CommunityPage from './components/CommunityPage'
 import Shop from './components/Shop'
+import ProductPage from './components/ProductPage'
 
 const App = () => {
   return (
