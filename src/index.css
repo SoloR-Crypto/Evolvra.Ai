@@ -16,12 +16,46 @@
 @tailwind components;
 @tailwind utilities;
 
-.hero-title {
-  background: linear-gradient(to right, #ffffff, #4ade80);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
-  animation: gradient 8s ease infinite;
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-gray-900/40 backdrop-blur-lg border border-primary-500/20 
+           hover:border-primary-500/40 transition-all duration-500 
+           hover:shadow-xl hover:shadow-primary-500/20;
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-primary-400 to-primary-300
+           animate-gradient bg-300% font-bold;
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-gradient {
+  animation: gradient 8s linear infinite;
+}
+
+.bg-300% {
+  background-size: 300% 300%;
 }
 
 @keyframes gradient {

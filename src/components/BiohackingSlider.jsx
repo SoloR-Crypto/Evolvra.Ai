@@ -42,14 +42,21 @@ const BiohackingSlider = () => {
         >
           Premium Biohacking Solutions
         </motion.h2>
-        
+
         <div className="relative overflow-hidden">
           <div className="flex gap-6 animate-scroll">
             {[...solutions, ...solutions].map((solution, index) => (
               <motion.div
                 key={index}
-                className="flex-none w-[320px] bg-gray-800/40 backdrop-blur-md rounded-xl p-8 border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300"
-                whileHover={{ scale: 1.02, y: -5 }}
+                className="flex-none w-[400px] h-[420px] glass-card rounded-xl pt-16 px-10 pb-10"
+                whileHover={{ 
+                  scale: 1.02, 
+                  y: -5,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-2xl">{solution.icon}</span>
