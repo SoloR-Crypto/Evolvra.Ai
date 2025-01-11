@@ -48,7 +48,7 @@ const BiohackingSlider = () => {
             {[...solutions, ...solutions].map((solution, index) => (
               <motion.div
                 key={index}
-                className="flex-none w-[320px] h-[340px] bg-gray-800/40 backdrop-blur-md rounded-xl pt-12 px-8 pb-8 border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300"
+                className="flex-none w-[320px] h-[380px] bg-gray-800/40 backdrop-blur-md rounded-xl pt-12 px-8 pb-8 border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300"
                 whileHover={{ scale: 1.02, y: -5 }}
               >
                 <div className="flex items-center justify-between mb-4">
