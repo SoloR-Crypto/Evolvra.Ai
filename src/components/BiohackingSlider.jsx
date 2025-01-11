@@ -44,11 +44,11 @@ const BiohackingSlider = () => {
         </motion.h2>
         
         <div className="relative overflow-hidden">
-          <div className="flex animate-scroll">
+          <div className="flex gap-6 animate-scroll">
             {[...solutions, ...solutions].map((solution, index) => (
               <motion.div
                 key={index}
-                className="flex-none w-80 mr-6 bg-gray-800/40 backdrop-blur-md rounded-xl p-6 border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300"
+                className="flex-none w-[320px] bg-gray-800/40 backdrop-blur-md rounded-xl p-8 border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300"
                 whileHover={{ scale: 1.02, y: -5 }}
               >
                 <div className="flex items-center justify-between mb-4">
