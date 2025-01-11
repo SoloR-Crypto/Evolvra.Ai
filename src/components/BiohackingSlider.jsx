@@ -42,13 +42,13 @@ const BiohackingSlider = () => {
         >
           Premium Biohacking Solutions
         </motion.h2>
-
+        
         <div className="relative overflow-hidden">
           <div className="flex gap-6 animate-scroll">
             {[...solutions, ...solutions].map((solution, index) => (
               <motion.div
                 key={index}
-                className="flex-none w-[320px] bg-gray-800/40 backdrop-blur-md rounded-xl p-8 border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300 flex flex-col"
+                className="flex-none w-[320px] bg-gray-800/40 backdrop-blur-md rounded-xl p-8 border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300"
                 whileHover={{ scale: 1.02, y: -5 }}
               >
                 <div className="flex items-center justify-between mb-4">
@@ -57,7 +57,7 @@ const BiohackingSlider = () => {
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3">{solution.title}</h3>
                 <p className="text-gray-300 text-sm">{solution.description}</p>
-                <button className="mt-auto text-primary-400 hover:text-primary-300 flex items-center text-sm font-medium">
+                <button className="mt-4 text-primary-400 hover:text-primary-300 flex items-center text-sm font-medium">
                   Learn More
                   <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
