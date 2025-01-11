@@ -138,7 +138,7 @@ const Community = () => {
               className="block"
             >
               <motion.div
-                className="luxury-card rounded-xl overflow-hidden border-2 border-gray-700/30 hover:border-primary-400/50 transition-all duration-500 h-full flex flex-col shadow-lg hover:shadow-2xl hover:shadow-primary-500/10 group"
+                className="glass-card rounded-xl overflow-hidden border-2 border-gray-700/30 hover:border-primary-400/50 transition-all duration-500 h-full flex flex-col shadow-lg hover:shadow-2xl hover:shadow-primary-500/10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 whileHover={{ 
