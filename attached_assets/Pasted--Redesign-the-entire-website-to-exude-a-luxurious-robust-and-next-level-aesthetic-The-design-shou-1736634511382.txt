@@ -1,0 +1,50 @@
+"Redesign the entire website to exude a luxurious, robust, and next-level aesthetic. The design should incorporate 4K resolution elements with a focus on high-end, premium visuals and modern UI/UX practices. Leverage Tailwind CSS to its full potential and ensure the following:
+
+Key Design Guidelines:
+Resolution & Graphics:
+
+Use 4K resolution images and assets for a crisp, visually stunning experience.
+Incorporate high-quality shadows for depth, giving the site a polished, 3D effect.
+Add subtle gradients and glassmorphism effects to sections for a futuristic look.
+Layout & Structure:
+
+Ensure a grid-based, symmetrical layout with perfect alignment for consistency.
+Maximize white space to create a clean, uncluttered interface.
+Use large, bold typography with luxury fonts for headings, paired with clean sans-serif fonts for body text.
+Animations & Interactivity:
+
+Add smooth animations for page transitions, hover effects, and interactive elements.
+Use 3D animations for buttons, icons, and featured elements.
+Integrate subtle parallax scrolling effects for depth and engagement.
+Dark/Light Theme Switcher:
+
+Include a theme toggle button to allow users to switch between dark mode and light mode seamlessly.
+Ensure both themes maintain the same level of elegance and readability.
+Dark theme: Use deep blacks, grays, and gold accents.
+Light theme: Use white, soft grays, and green/gold highlights.
+UI Features:
+
+Dynamic Navigation Bar: Responsive, sticky navigation with hover effects and smooth dropdown menus.
+Cards with 3D Effects: Showcase products or content in cards with hover-activated shadows and animations.
+Call-to-Action Buttons: High-contrast buttons with glowing borders or animated gradients.
+Technical Implementation:
+Use Tailwind CSS for styling:
+
+Leverage utilities for responsive grids, spacing, and custom animations.
+Use Tailwind's box-shadow and gradient utilities to add depth and vibrancy.
+Add Advanced Interactions:
+
+Implement Framer Motion or GSAP for complex animations.
+Use Lottie animations for micro-interactions like button clicks and theme toggles.
+Optimize for Performance:
+
+Ensure images are optimized with lazy loading and WebP formats.
+Use Tailwind's JIT mode to keep the CSS file lightweight.
+Cross-Browser & Device Testing:
+
+Ensure the design is responsive and works seamlessly across all browsers and devices.
+Final Deliverables:
+A luxurious, high-resolution website with a dark/light theme switcher.
+Smooth, high-end animations and 3D effects on interactive elements.
+Fully responsive design with a modern, symmetrical layout and a premium feel."
+This prompt ensures your website will have a stunning, high-end visual impact while remaining functional, fast, and elegant. Let me know if you'd like to expand on specific features or tools!
