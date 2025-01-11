@@ -32,7 +32,7 @@ const solutions = [
 
 const BiohackingSlider = () => {
   return (
-    <section className="pt-24 pb-12 sm:pt-32 sm:pb-16 bg-gray-900/50 backdrop-blur-lg">
+    <section className="py-12 sm:py-16 bg-gray-900/50 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2 
           className="hero-title text-4xl md:text-5xl font-bold text-center mb-12"
@@ -42,13 +42,13 @@ const BiohackingSlider = () => {
         >
           Premium Biohacking Solutions
         </motion.h2>
-
+        
         <div className="relative overflow-hidden">
           <div className="flex gap-6 animate-scroll">
             {[...solutions, ...solutions].map((solution, index) => (
               <motion.div
                 key={index}
-                className="flex-none w-[400px] h-[420px] bg-gray-800/40 backdrop-blur-md rounded-xl pt-16 px-10 pb-10 border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300"
+                className="flex-none w-[320px] bg-gray-800/40 backdrop-blur-md rounded-xl p-8 border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300"
                 whileHover={{ scale: 1.02, y: -5 }}
               >
                 <div className="flex items-center justify-between mb-4">
