@@ -48,7 +48,7 @@ const BiohackingSlider = () => {
             {[...solutions, ...solutions].map((solution, index) => (
               <motion.div
                 key={index}
-                className="flex-none w-[400px] h-[420px] glass-card rounded-xl pt-16 px-10 pb-10"
+                className="flex-none w-[320px] h-[340px] glass-card rounded-xl pt-10 px-6 pb-6"
                 whileHover={{ 
                   scale: 1.02, 
                   y: -5,
