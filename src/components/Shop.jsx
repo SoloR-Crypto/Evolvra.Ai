@@ -10,7 +10,9 @@ const Shop = () => {
     { name: 'All', icon: <FaLeaf /> },
     { name: 'Nootropics', icon: <FaBrain /> },
     { name: 'Supplements', icon: <FaDna /> },
-    { name: 'Elixirs', icon: <FaFlask /> }
+    { name: 'Elixirs', icon: <FaFlask /> },
+    { name: 'Sacred Herbs', icon: <FaLeaf /> },
+    { name: 'Ceremonial Tools', icon: <FaFlask /> }
   ];
 
   const products = [
@@ -43,6 +45,46 @@ const Shop = () => {
       description: "Ancient wisdom meets modern biohacking excellence.",
       image: "/golden-elixir.jpg",
       icon: '✨'
+    },
+    {
+      id: 4,
+      name: "Sacred Blue Lotus",
+      category: "Sacred Herbs",
+      price: 89.99,
+      subscription: 79.99,
+      description: "Pure, organic Egyptian blue lotus flowers. Ancient ceremonial grade.",
+      image: "/blue-lotus.jpg",
+      icon: '🌺'
+    },
+    {
+      id: 5,
+      name: "Wild Harvested Mugwort",
+      category: "Sacred Herbs",
+      price: 49.99,
+      subscription: 44.99,
+      description: "Premium dream herb, sustainably wildcrafted from pristine locations.",
+      image: "/mugwort.jpg",
+      icon: '🌿'
+    },
+    {
+      id: 6,
+      name: "Ceremonial Brass Mortar",
+      category: "Ceremonial Tools",
+      price: 129.99,
+      subscription: null,
+      description: "Sacred geometry-engraved brass mortar and pestle for herb preparation.",
+      image: "/mortar.jpg",
+      icon: '🏺'
+    },
+    {
+      id: 7,
+      name: "Crystal Elixir Vessel",
+      category: "Ceremonial Tools",
+      price: 199.99,
+      subscription: null,
+      description: "Amethyst-infused glass vessel for potion crafting and storage.",
+      image: "/vessel.jpg",
+      icon: '🔮'
     }
   ];
 
