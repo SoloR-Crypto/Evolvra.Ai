@@ -33,7 +33,7 @@ const Features = () => {
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center text-center p-6 bg-gray-800/40 backdrop-blur-md rounded-xl border border-primary-500/20 hover:border-primary-500/40 transition-all duration-300"
+              className="luxury-card flex flex-col items-center text-center p-8 backdrop-blur-md"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}

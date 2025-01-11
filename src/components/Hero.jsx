@@ -25,13 +25,14 @@ const Hero = () => {
           Join the Revolution Against Misinformation, Mind Control, and Nutritional Oppression. Say no to processed foods and synthetic supplements.
         </motion.p>
         <motion.button
-          className="revolution-button bg-primary-500 text-white font-bold py-3 px-8 rounded-lg text-lg"
+          className="luxury-button text-lg group relative overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
+          <span className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
           Join the Revolution
         </motion.button>
       </div>
