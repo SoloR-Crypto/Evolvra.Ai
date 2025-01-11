@@ -1,10 +1,12 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaLeaf, FaDna, FaBrain, FaFlask } from 'react-icons/fa';
+import { FaLeaf, FaDna, FaBrain, FaFlask, FaSearch, FaShoppingCart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Shop = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [cartCount, setCartCount] = useState(0);
 
   const categories = [
     { name: 'All', icon: <FaLeaf /> },
@@ -24,7 +26,10 @@ const Shop = () => {
       subscription: 179.99,
       description: "Advanced cognitive enhancement formula with premium nootropics.",
       image: "/neural-elite.jpg",
-      icon: '🧠'
+      icon: '🧠',
+      stock: 15,
+      rating: 4.8,
+      reviews: 124
     },
     {
       id: 2,
@@ -34,7 +39,10 @@ const Shop = () => {
       subscription: 269.99,
       description: "Revolutionary cellular optimization complex.",
       image: "/quantum-cell.jpg",
-      icon: '⚡'
+      icon: '⚡',
+      stock: 22,
+      rating: 4.5,
+      reviews: 87
     },
     {
       id: 3,
@@ -44,7 +52,10 @@ const Shop = () => {
       subscription: 139.99,
       description: "Ancient wisdom meets modern biohacking excellence.",
       image: "/golden-elixir.jpg",
-      icon: '✨'
+      icon: '✨',
+      stock: 7,
+      rating: 4.9,
+      reviews: 321
     },
     {
       id: 4,
@@ -54,7 +65,10 @@ const Shop = () => {
       subscription: 79.99,
       description: "Pure, organic Egyptian blue lotus flowers. Ancient ceremonial grade.",
       image: "/blue-lotus.jpg",
-      icon: '🌺'
+      icon: '🌺',
+      stock: 35,
+      rating: 4.7,
+      reviews: 156
     },
     {
       id: 5,
@@ -64,7 +78,10 @@ const Shop = () => {
       subscription: 44.99,
       description: "Premium dream herb, sustainably wildcrafted from pristine locations.",
       image: "/mugwort.jpg",
-      icon: '🌿'
+      icon: '🌿',
+      stock: 18,
+      rating: 4.6,
+      reviews: 92
     },
     {
       id: 6,
@@ -74,7 +91,10 @@ const Shop = () => {
       subscription: null,
       description: "Sacred geometry-engraved brass mortar and pestle for herb preparation.",
       image: "/mortar.jpg",
-      icon: '🏺'
+      icon: '🏺',
+      stock: 10,
+      rating: 4.2,
+      reviews: 55
     },
     {
       id: 7,
@@ -84,7 +104,10 @@ const Shop = () => {
       subscription: null,
       description: "Amethyst-infused glass vessel for potion crafting and storage.",
       image: "/vessel.jpg",
-      icon: '🔮'
+      icon: '🔮',
+      stock: 5,
+      rating: 4.9,
+      reviews: 111
     },
     {
       id: 8,
@@ -94,7 +117,10 @@ const Shop = () => {
       subscription: 24.99,
       description: "100% organic, high-curcumin Indian turmeric root powder. Ancient healing wisdom.",
       image: "/turmeric.jpg",
-      icon: '🌾'
+      icon: '🌾',
+      stock: 40,
+      rating: 4.4,
+      reviews: 185
     },
     {
       id: 9,
@@ -104,7 +130,10 @@ const Shop = () => {
       subscription: 16.99,
       description: "Premium black pepper, essential for turmeric absorption enhancement.",
       image: "/blackpepper.jpg",
-      icon: '🌶️'
+      icon: '🌶️',
+      stock: 60,
+      rating: 4.3,
+      reviews: 210
     },
     {
       id: 10,
@@ -114,7 +143,10 @@ const Shop = () => {
       subscription: 21.99,
       description: "Wild-harvested cayenne pepper, high capsaicin content for circulation.",
       image: "/cayenne.jpg",
-      icon: '🔥'
+      icon: '🔥',
+      stock: 28,
+      rating: 4.1,
+      reviews: 78
     }
   ];
 
@@ -122,26 +154,55 @@ const Shop = () => {
     ? products 
     : products.filter(p => p.category === activeCategory);
 
+  const searchedProducts = searchQuery
+    ? filteredProducts.filter(p => 
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : filteredProducts;
+
+  const addToCart = (productId) => {
+    setCartCount(prev => prev + 1);
+    // Shopify cart integration would go here
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 pt-24 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
+        {/* Header with Search and Cart */}
+        <div className="flex justify-between items-center mb-8">
           <motion.h1 
-            className="premium-heading mb-6"
+            className="premium-heading text-4xl md:text-5xl lg:text-6xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Premium Biohacking Arsenal
+            Premium Arsenal
           </motion.h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Unlock your highest potential with our curated collection of premium supplements and nootropics.
-          </p>
+          <div className="flex items-center space-x-6">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-64 px-4 py-2 rounded-lg bg-gray-800/50 border border-gray-700 text-white focus:outline-none focus:border-primary-500"
+              />
+              <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            </div>
+            <div className="relative">
+              <FaShoppingCart className="text-2xl text-white cursor-pointer" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-primary-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Categories */}
-        <div className="flex justify-center space-x-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category) => (
             <motion.button
               key={category.name}
@@ -162,36 +223,61 @@ const Shop = () => {
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <motion.div
-              key={product.id}
-              className="luxury-card"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.03 }}
-            >
-              <div className="p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-3xl">{product.icon}</span>
-                  <span className="premium-text text-lg">{product.category}</span>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">{product.name}</h3>
-                <p className="text-gray-400 mb-6">{product.description}</p>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-400">One-time purchase</span>
-                    <span className="text-2xl text-white">${product.price}</span>
+          {searchedProducts.map((product) => (
+            <Link to={`/product/${product.id}`} key={product.id}>
+              <motion.div
+                className="luxury-card group"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.03 }}
+              >
+                <div className="relative overflow-hidden rounded-t-xl">
+                  <div className="aspect-w-16 aspect-h-9 bg-gray-800 group-hover:scale-105 transition-transform duration-500">
+                    {/* Product image would go here */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-400">Subscription</span>
-                    <span className="text-2xl premium-text">${product.subscription}</span>
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1 bg-primary-500/90 backdrop-blur-sm rounded-full text-sm text-white">
+                      {product.stock} in stock
+                    </span>
                   </div>
-                  <button className="w-full luxury-button mt-6">
-                    Add to Cart
-                  </button>
                 </div>
-              </div>
-            </motion.div>
+
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-3xl">{product.icon}</span>
+                    <div className="flex items-center">
+                      <span className="text-yellow-400">★</span>
+                      <span className="text-white ml-1">{product.rating}</span>
+                      <span className="text-gray-400 text-sm ml-1">({product.reviews})</span>
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">{product.name}</h3>
+                  <p className="text-gray-400 mb-4">{product.description}</p>
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <span className="text-2xl text-white">${product.price}</span>
+                      {product.subscription && (
+                        <span className="text-sm text-primary-400 ml-2">
+                          ${product.subscription} /mo
+                        </span>
+                      )}
+                    </div>
+                    <motion.button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        addToCart(product.id);
+                      }}
+                      className="luxury-button"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Add to Cart
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
 
