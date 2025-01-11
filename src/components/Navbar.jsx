@@ -125,26 +125,30 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden mt-4"
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="md:hidden mt-6"
             >
-              <div className="flex flex-col space-y-4 py-4">
-                {['Protocols', 'Research', 'Community', 'Shop', 'About', 'Contact'].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <Link
-                      to={item.toLowerCase() === 'community' ? '/community' : '#'}
-                      className="text-gray-300 hover:text-white px-4 py-2 text-lg font-medium transition-colors duration-300 block"
-                      onClick={() => setIsMobileMenuOpen(false)}
+              <div className="glass-card rounded-xl border border-gray-700/30 p-4">
+                <div className="flex flex-col space-y-3">
+                  {['Protocols', 'Research', 'Community', 'Shop', 'About', 'Contact'].map((item, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: i * 0.1, duration: 0.3 }}
+                      className="relative group"
                     >
-                      {item}
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        to={item.toLowerCase() === 'community' ? '/community' : '#'}
+                        className="flex items-center space-x-2 text-gray-300 hover:text-white px-4 py-2.5 rounded-lg bg-gray-800/30 backdrop-blur-sm hover:bg-primary-500/10 transition-all duration-300"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <span className="text-lg font-medium">{item}</span>
+                        <div className="absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-primary-400/50 to-primary-300/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           )}
