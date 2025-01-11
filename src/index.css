@@ -46,6 +46,13 @@
            leading-tight tracking-tight drop-shadow-lg;
   }
 
+  .section-heading {
+    @apply text-4xl md:text-5xl font-bold text-center mb-12
+           bg-clip-text text-transparent bg-gradient-to-r
+           from-white via-primary-300 to-primary-500
+           tracking-tight drop-shadow-lg animate-gradient bg-300%;
+  }
+
   .luxury-card {
     @apply rounded-xl overflow-hidden bg-gradient-to-br 
            from-gray-900/95 via-gray-800/95 to-gray-900/95
