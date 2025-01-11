@@ -76,7 +76,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
               >
                 <Link 
-                  to="#" 
+                  to={item.toLowerCase() === 'shop' ? '/shop' : '#'} 
                   className="text-base font-medium text-gray-300 hover:text-white transition-colors duration-300"
                 >
                   {item}
