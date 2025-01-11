@@ -238,8 +238,10 @@ const Shop = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
                   </div>
                   <div className="absolute top-4 right-4">
-                    <span className="px-3 py-1 bg-primary-500/90 backdrop-blur-sm rounded-full text-sm text-white">
-                      {product.stock} in stock
+                    <span className="px-3 py-1 bg-primary-500/90 backdrop-blur-sm rounded-full text-sm text-white flex items-center gap-1">
+                      <span className="text-yellow-400">★</span>
+                      {product.rating}
+                      <span className="text-xs">({product.reviews})</span>
                     </span>
                   </div>
                 </div>
