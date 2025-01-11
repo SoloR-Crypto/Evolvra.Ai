@@ -2,37 +2,36 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaStar, FaShoppingCart, FaLeaf } from 'react-icons/fa';
+import { FaShoppingCart, FaLeaf } from 'react-icons/fa';
 
 const ProductPage = () => {
   const { id } = useParams();
-  const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [selectedVariant, setSelectedVariant] = useState('default');
 
-  // Mock product data - would be fetched from Shopify
+  // Mock product data - replace with your actual product data
   const product = {
-    id: 1,
-    name: "Neural Enhancement Elite",
-    category: "Nootropics",
-    price: 199.99,
-    subscription: 179.99,
-    description: "Advanced cognitive enhancement formula with premium nootropics.",
-    images: ["/neural-elite.jpg", "/neural-elite-2.jpg", "/neural-elite-3.jpg"],
-    icon: '🧠',
-    stock: 15,
-    rating: 4.8,
-    reviews: 124,
-    details: [
-      "Enhanced cognitive function",
-      "Improved mental clarity",
-      "Increased focus and concentration",
-      "Premium grade ingredients",
-      "Third-party tested"
-    ]
+    id: parseInt(id),
+    name: "Sacred Turmeric Root",
+    price: 29.99,
+    description: "100% organic, high-curcumin Indian turmeric root powder. Ancient healing wisdom.",
+    images: ["/turmeric.jpg", "/turmeric-2.jpg", "/turmeric-3.jpg"],
+    variants: ["100g", "250g", "500g"],
+    stock: 10
   };
 
   const addToCart = () => {
-    // Shopify cart integration would go here
+    // Here you'll integrate with your chosen backend
+    const cartItem = {
+      productId: product.id,
+      quantity,
+      variant: selectedVariant,
+      price: product.price,
+      name: product.name
+    };
+    
+    console.log('Adding to cart:', cartItem);
+    // Implement your cart logic here
   };
 
   return (
@@ -40,106 +39,97 @@ const ProductPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Images */}
-          <div className="space-y-4">
-            <motion.div 
-              className="aspect-w-1 aspect-h-1 rounded-xl overflow-hidden bg-gray-800"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            <div className="aspect-w-1 aspect-h-1">
               <img 
-                src={product.images[selectedImage]} 
+                src={product.images[0]} 
                 alt={product.name}
-                className="object-cover w-full h-full"
+                className="w-full h-full object-cover rounded-xl"
               />
-            </motion.div>
+            </div>
             <div className="grid grid-cols-3 gap-4">
-              {product.images.map((image, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`aspect-w-1 aspect-h-1 rounded-lg overflow-hidden ${
-                    selectedImage === index ? 'ring-2 ring-primary-500' : ''
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <img 
-                    src={image} 
-                    alt={`${product.name} ${index + 1}`}
-                    className="object-cover w-full h-full"
-                  />
-                </motion.button>
+              {product.images.slice(1).map((img, idx) => (
+                <img 
+                  key={idx}
+                  src={img}
+                  alt={`${product.name} ${idx + 2}`}
+                  className="w-full h-24 object-cover rounded-lg cursor-pointer"
+                />
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Product Info */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <span className="text-4xl">{product.icon}</span>
-              <span className="text-primary-400">{product.category}</span>
-            </div>
+          <motion.div
+            className="space-y-6"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
             <h1 className="text-4xl font-bold text-white">{product.name}</h1>
-            <div className="flex items-center space-x-2">
-              <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                  <FaStar key={i} className={i < Math.floor(product.rating) ? 'text-yellow-400' : 'text-gray-600'} />
+            <p className="text-2xl text-primary-400">${product.price}</p>
+            <p className="text-gray-300">{product.description}</p>
+
+            {/* Variants */}
+            <div className="space-y-2">
+              <label className="text-white font-medium">Size</label>
+              <div className="grid grid-cols-3 gap-3">
+                {product.variants.map((variant) => (
+                  <button
+                    key={variant}
+                    className={`py-2 px-4 rounded-lg font-medium ${
+                      selectedVariant === variant
+                        ? 'bg-primary-500 text-white'
+                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                    }`}
+                    onClick={() => setSelectedVariant(variant)}
+                  >
+                    {variant}
+                  </button>
                 ))}
-              </div>
-              <span className="text-white">{product.rating}</span>
-              <span className="text-gray-400">({product.reviews} reviews)</span>
-            </div>
-            <p className="text-gray-300 text-lg">{product.description}</p>
-            
-            <div className="space-y-4 border-t border-gray-800 pt-6">
-              <div className="flex justify-between items-center">
-                <span className="text-gray-400">Price</span>
-                <span className="text-3xl text-white">${product.price}</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-400">Subscription</span>
-                <span className="text-3xl text-primary-400">${product.subscription}/mo</span>
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center border border-gray-700 rounded-lg">
+            {/* Quantity */}
+            <div className="space-y-2">
+              <label className="text-white font-medium">Quantity</label>
+              <div className="flex items-center space-x-3">
                 <button 
-                  className="px-4 py-2 text-gray-400 hover:text-white"
+                  className="w-10 h-10 rounded-lg bg-gray-800 text-white flex items-center justify-center"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 >
                   -
                 </button>
-                <span className="px-4 text-white">{quantity}</span>
+                <span className="text-white">{quantity}</span>
                 <button 
-                  className="px-4 py-2 text-gray-400 hover:text-white"
-                  onClick={() => setQuantity(quantity + 1)}
+                  className="w-10 h-10 rounded-lg bg-gray-800 text-white flex items-center justify-center"
+                  onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
                 >
                   +
                 </button>
               </div>
-              <motion.button
-                className="flex-1 luxury-button"
-                onClick={addToCart}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <FaShoppingCart className="inline-block mr-2" />
-                Add to Cart
-              </motion.button>
             </div>
 
-            <div className="border-t border-gray-800 pt-6">
-              <h3 className="text-xl font-semibold text-white mb-4">Key Benefits</h3>
-              <ul className="space-y-2">
-                {product.details.map((detail, index) => (
-                  <li key={index} className="flex items-center text-gray-300">
-                    <FaLeaf className="text-primary-500 mr-2" />
-                    {detail}
-                  </li>
-                ))}
-              </ul>
+            {/* Add to Cart */}
+            <button
+              className="w-full luxury-button flex items-center justify-center space-x-2"
+              onClick={addToCart}
+            >
+              <FaShoppingCart />
+              <span>Add to Cart</span>
+            </button>
+
+            {/* Additional Info */}
+            <div className="border-t border-gray-800 pt-6 mt-6">
+              <div className="flex items-center space-x-2 text-primary-400">
+                <FaLeaf />
+                <span>100% Organic & Pure</span>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

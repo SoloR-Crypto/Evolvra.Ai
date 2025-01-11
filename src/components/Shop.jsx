@@ -234,6 +234,7 @@ const Shop = () => {
                 <div className="relative overflow-hidden rounded-t-xl">
                   <div className="aspect-w-16 aspect-h-9 bg-gray-800 group-hover:scale-105 transition-transform duration-500">
                     {/* Product image would go here */}
+                    <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-lg mb-4" />
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
                   </div>
                   <div className="absolute top-4 right-4">

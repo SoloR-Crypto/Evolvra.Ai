@@ -12,6 +12,7 @@ import Shop from './components/Shop'
 const App = () => {
   return (
     <Router>
+      <CartProvider>
       <div className="min-h-screen bg-gray-900">
         <Navbar />
         <Routes>
@@ -25,9 +26,11 @@ const App = () => {
           <Route path="/community" element={<Community />} />
           <Route path="/community/:slug" element={<CommunityPage />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/product/:id" element={<ProductPage />} />
         </Routes>
         <Footer />
       </div>
+    </CartProvider>
     </Router>
   )
 }
