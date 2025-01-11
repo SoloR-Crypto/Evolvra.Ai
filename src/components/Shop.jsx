@@ -85,6 +85,36 @@ const Shop = () => {
       description: "Amethyst-infused glass vessel for potion crafting and storage.",
       image: "/vessel.jpg",
       icon: '🔮'
+    },
+    {
+      id: 8,
+      name: "Sacred Turmeric Root",
+      category: "Sacred Herbs",
+      price: 29.99,
+      subscription: 24.99,
+      description: "100% organic, high-curcumin Indian turmeric root powder. Ancient healing wisdom.",
+      image: "/turmeric.jpg",
+      icon: '🌾'
+    },
+    {
+      id: 9,
+      name: "Black Pepper Supreme",
+      category: "Sacred Herbs",
+      price: 19.99,
+      subscription: 16.99,
+      description: "Premium black pepper, essential for turmeric absorption enhancement.",
+      image: "/blackpepper.jpg",
+      icon: '🌶️'
+    },
+    {
+      id: 10,
+      name: "Cayenne Fire Blend",
+      category: "Sacred Herbs",
+      price: 24.99,
+      subscription: 21.99,
+      description: "Wild-harvested cayenne pepper, high capsaicin content for circulation.",
+      image: "/cayenne.jpg",
+      icon: '🔥'
     }
   ];
 
