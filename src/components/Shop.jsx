@@ -170,9 +170,9 @@ const Shop = () => {
     <div className="min-h-screen bg-gray-900 pt-24 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Search and Cart */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="text-center mb-8">
           <motion.h1 
-            className="premium-heading text-4xl md:text-5xl lg:text-6xl"
+            className="section-heading"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
