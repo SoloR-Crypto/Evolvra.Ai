@@ -13,6 +13,11 @@ if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
+
+  if (error) {
+    return <div className="text-white p-4">Error loading products: {error.message}</div>;
+  }
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All'); // Re-added from original
