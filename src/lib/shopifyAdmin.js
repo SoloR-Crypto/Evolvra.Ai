@@ -1,6 +1,6 @@
 
-const SHOPIFY_ADMIN_API = process.env.SHOPIFY_ADMIN_API || 'https://your-store.myshopify.com/admin/api/2024-01/graphql.json';
-const ADMIN_ACCESS_TOKEN = process.env.SHOPIFY_ADMIN_ACCESS_TOKEN;
+const SHOPIFY_ADMIN_API = import.meta.env.VITE_SHOPIFY_ADMIN_API || 'https://your-store.myshopify.com/admin/api/2024-01/graphql.json';
+const ADMIN_ACCESS_TOKEN = import.meta.env.VITE_SHOPIFY_ADMIN_ACCESS_TOKEN;
 
 export async function updateInventory(variantId, quantity) {
   const mutation = `

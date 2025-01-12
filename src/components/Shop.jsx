@@ -4,8 +4,8 @@ import { FaShoppingCart, FaSearch, FaLeaf, FaDna, FaBrain, FaFlask } from 'react
 import { Link } from 'react-router-dom';
 import { useCart } from '../lib/CartContext';
 
-const SHOPIFY_STOREFRONT_API = process.env.SHOPIFY_STOREFRONT_API;
-const STOREFRONT_ACCESS_TOKEN = process.env.SHOPIFY_STOREFRONT_TOKEN;
+const SHOPIFY_STOREFRONT_API = import.meta.env.VITE_SHOPIFY_STOREFRONT_API;
+const STOREFRONT_ACCESS_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
 
 if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
   console.error('Missing required Shopify API configuration');
