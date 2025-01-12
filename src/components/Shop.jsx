@@ -7,6 +7,10 @@ import { useCart } from '../lib/CartContext';
 const SHOPIFY_STOREFRONT_API = process.env.SHOPIFY_STOREFRONT_API;
 const STOREFRONT_ACCESS_TOKEN = process.env.SHOPIFY_STOREFRONT_TOKEN;
 
+if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
+  console.error('Missing required Shopify API configuration');
+}
+
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
