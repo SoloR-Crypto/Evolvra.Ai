@@ -10,6 +10,7 @@ import Community from './components/Community'
 import CommunityPage from './components/CommunityPage'
 import Shop from './components/Shop'
 import ProductPage from './components/ProductPage'
+import CartPage from './components/CartPage'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/community/:slug" element={<CommunityPage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
         <Footer />
       </div>
