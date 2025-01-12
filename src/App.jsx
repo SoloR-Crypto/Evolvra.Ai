@@ -12,6 +12,12 @@ import Shop from './components/Shop'
 import ProductPage from './components/ProductPage'
 
 const App = () => {
+  const [error, setError] = React.useState(null);
+
+  if (error) {
+    return <div className="text-white p-4">Error loading application: {error.message}</div>;
+  }
+
   return (
     <Router>
       <CartProvider>
