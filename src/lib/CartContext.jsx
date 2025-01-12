@@ -21,6 +21,10 @@ export function CartProvider({ children }) {
   }, [cart]);
 
   const createCheckout = async (items) => {
+    if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
+      throw new Error('Missing Shopify API configuration');
+    }
+
     const lineItems = items.map(item => ({
       variantId: item.variantId,
       quantity: item.quantity,
@@ -59,11 +63,19 @@ export function CartProvider({ children }) {
         }),
       });
 
-      const { data } = await response.json();
-      return data.checkoutCreate.checkout;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const jsonData = await response.json();
+      if (!jsonData.data || !jsonData.data.checkoutCreate) {
+        throw new Error('Invalid API response structure');
+      }
+
+      return jsonData.data.checkoutCreate.checkout;
     } catch (error) {
       console.error('Error creating checkout:', error);
-      return null;
+      throw error;
     }
   };
 

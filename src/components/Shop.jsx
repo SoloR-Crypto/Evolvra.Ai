@@ -59,6 +59,10 @@ const Shop = () => {
     `;
 
     try {
+      if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
+        throw new Error('Missing Shopify API configuration');
+      }
+
       const response = await fetch(SHOPIFY_STOREFRONT_API, {
         method: 'POST',
         headers: {
@@ -68,11 +72,20 @@ const Shop = () => {
         body: JSON.stringify({ query }),
       });
 
-      const { data } = await response.json();
-      setProducts(data.products.edges.map(edge => edge.node));
-      setLoading(false);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const jsonData = await response.json();
+      if (!jsonData.data) {
+        throw new Error('Invalid API response structure');
+      }
+
+      setProducts(jsonData.data.products.edges.map(edge => edge.node));
     } catch (error) {
       console.error('Error fetching products:', error);
+      setError(error.message);
+    } finally {
       setLoading(false);
     }
   };
