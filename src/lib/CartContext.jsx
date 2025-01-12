@@ -1,8 +1,7 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const SHOPIFY_STOREFRONT_API = 'https://your-store.myshopify.com/api/2024-01/graphql';
-const STOREFRONT_ACCESS_TOKEN = '536ea351df8e040ef4f4a45aeea05641';
+const SHOPIFY_STOREFRONT_API = process.env.SHOPIFY_STOREFRONT_API;
+const STOREFRONT_ACCESS_TOKEN = process.env.SHOPIFY_STOREFRONT_TOKEN;
 
 const CartContext = createContext();
 
@@ -11,16 +10,21 @@ export function CartProvider({ children }) {
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
   });
-  const [checkoutId, setCheckoutId] = useState(null);
+  const [checkoutUrl, setCheckoutUrl] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const createCheckout = async () => {
+  const createCheckout = async (items) => {
+    const lineItems = items.map(item => ({
+      variantId: item.variantId,
+      quantity: item.quantity,
+    }));
+
     const mutation = `
-      mutation {
-        checkoutCreate(input: {}) {
+      mutation checkoutCreate($input: CheckoutCreateInput!) {
+        checkoutCreate(input: $input) {
           checkout {
             id
             webUrl
@@ -33,67 +37,41 @@ export function CartProvider({ children }) {
       }
     `;
 
-    const response = await fetch(SHOPIFY_STOREFRONT_API, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN,
-      },
-      body: JSON.stringify({ query: mutation }),
-    });
+    try {
+      const response = await fetch(SHOPIFY_STOREFRONT_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN,
+        },
+        body: JSON.stringify({
+          query: mutation,
+          variables: {
+            input: {
+              lineItems,
+              allowPartialAddresses: true,
+            },
+          },
+        }),
+      });
 
-    const { data } = await response.json();
-    return data.checkoutCreate.checkout;
+      const { data } = await response.json();
+      return data.checkoutCreate.checkout;
+    } catch (error) {
+      console.error('Error creating checkout:', error);
+      return null;
+    }
   };
 
   const addToCart = async (item) => {
-    // Create checkout if it doesn't exist
-    if (!checkoutId) {
-      const checkout = await createCheckout();
-      setCheckoutId(checkout.id);
-    }
-
-    // Add item to Shopify cart
-    const mutation = `
-      mutation {
-        checkoutLineItemsAdd(
-          checkoutId: "${checkoutId}",
-          lineItems: [{ variantId: "${item.variantId}", quantity: ${item.quantity} }]
-        ) {
-          checkout {
-            id
-            lineItems {
-              edges {
-                node {
-                  id
-                  quantity
-                  title
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
-
-    await fetch(SHOPIFY_STOREFRONT_API, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN,
-      },
-      body: JSON.stringify({ query: mutation }),
-    });
-
-    // Update local cart state
     setCart(prevCart => {
       const existingItem = prevCart.find(i => 
-        i.productId === item.productId && i.variant === item.variant
+        i.variantId === item.variantId
       );
 
       if (existingItem) {
         return prevCart.map(i => 
-          i.productId === item.productId && i.variant === item.variant
+          i.variantId === item.variantId
             ? { ...i, quantity: i.quantity + item.quantity }
             : i
         );
@@ -103,66 +81,26 @@ export function CartProvider({ children }) {
     });
   };
 
-  const removeFromCart = async (productId, variant) => {
-    // Remove from Shopify cart
-    if (checkoutId) {
-      const mutation = `
-        mutation {
-          checkoutLineItemsRemove(
-            checkoutId: "${checkoutId}",
-            lineItemIds: ["${productId}"]
-          ) {
-            checkout {
-              id
-            }
-          }
-        }
-      `;
-
-      await fetch(SHOPIFY_STOREFRONT_API, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN,
-        },
-        body: JSON.stringify({ query: mutation }),
-      });
-    }
-
-    // Update local cart state
-    setCart(prevCart => prevCart.filter(item => 
-      !(item.productId === productId && item.variant === variant)
-    ));
+  const removeFromCart = (variantId) => {
+    setCart(prevCart => prevCart.filter(item => item.variantId !== variantId));
   };
 
   const checkout = async () => {
-    if (!checkoutId) return null;
-    
-    const query = `
-      query {
-        node(id: "${checkoutId}") {
-          ... on Checkout {
-            webUrl
-          }
-        }
-      }
-    `;
-
-    const response = await fetch(SHOPIFY_STOREFRONT_API, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN,
-      },
-      body: JSON.stringify({ query }),
-    });
-
-    const { data } = await response.json();
-    return data.node.webUrl;
+    const checkoutDetails = await createCheckout(cart);
+    if (checkoutDetails?.webUrl) {
+      setCheckoutUrl(checkoutDetails.webUrl);
+      window.location.href = checkoutDetails.webUrl;
+    }
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, checkout }}>
+    <CartContext.Provider value={{ 
+      cart, 
+      addToCart, 
+      removeFromCart, 
+      checkout,
+      checkoutUrl 
+    }}>
       {children}
     </CartContext.Provider>
   );
