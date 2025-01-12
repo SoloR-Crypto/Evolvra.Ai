@@ -4,20 +4,11 @@ import { FaShoppingCart, FaSearch, FaLeaf, FaDna, FaBrain, FaFlask } from 'react
 import { Link } from 'react-router-dom';
 import { useCart } from '../lib/CartContext';
 
-const SHOPIFY_STOREFRONT_API = import.meta.env.VITE_SHOPIFY_STOREFRONT_API;
-const STOREFRONT_ACCESS_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
-
-if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
-  console.error('Missing required Shopify API configuration');
-}
+const SHOPIFY_STOREFRONT_API = process.env.SHOPIFY_STOREFRONT_API;
+const STOREFRONT_ACCESS_TOKEN = process.env.SHOPIFY_STOREFRONT_TOKEN;
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState(null);
-
-  if (error) {
-    return <div className="text-white p-4">Error loading products: {error.message}</div>;
-  }
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All'); // Re-added from original
@@ -59,10 +50,6 @@ const Shop = () => {
     `;
 
     try {
-      if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
-        throw new Error('Missing Shopify API configuration');
-      }
-
       const response = await fetch(SHOPIFY_STOREFRONT_API, {
         method: 'POST',
         headers: {
@@ -72,20 +59,11 @@ const Shop = () => {
         body: JSON.stringify({ query }),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const jsonData = await response.json();
-      if (!jsonData.data) {
-        throw new Error('Invalid API response structure');
-      }
-
-      setProducts(jsonData.data.products.edges.map(edge => edge.node));
+      const { data } = await response.json();
+      setProducts(data.products.edges.map(edge => edge.node));
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching products:', error);
-      setError(error.message);
-    } finally {
       setLoading(false);
     }
   };

@@ -1,11 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const SHOPIFY_STOREFRONT_API = import.meta.env.VITE_SHOPIFY_STOREFRONT_API;
-const STOREFRONT_ACCESS_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
-
-if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
-  console.error('Missing required Shopify API configuration');
-}
+const SHOPIFY_STOREFRONT_API = process.env.SHOPIFY_STOREFRONT_API;
+const STOREFRONT_ACCESS_TOKEN = process.env.SHOPIFY_STOREFRONT_TOKEN;
 
 const CartContext = createContext();
 
@@ -21,10 +17,6 @@ export function CartProvider({ children }) {
   }, [cart]);
 
   const createCheckout = async (items) => {
-    if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
-      throw new Error('Missing Shopify API configuration');
-    }
-
     const lineItems = items.map(item => ({
       variantId: item.variantId,
       quantity: item.quantity,
@@ -63,19 +55,11 @@ export function CartProvider({ children }) {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const jsonData = await response.json();
-      if (!jsonData.data || !jsonData.data.checkoutCreate) {
-        throw new Error('Invalid API response structure');
-      }
-
-      return jsonData.data.checkoutCreate.checkout;
+      const { data } = await response.json();
+      return data.checkoutCreate.checkout;
     } catch (error) {
       console.error('Error creating checkout:', error);
-      throw error;
+      return null;
     }
   };
 
