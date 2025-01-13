@@ -77,12 +77,22 @@ const ProductCard = ({ product, loading }) => {
         whileHover={{ scale: 1.03 }}
       >
         <div className="relative overflow-hidden rounded-t-xl">
-          <img
-            src={imageUrl}
-            alt={product.title}
-            className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-            onError={(e) => e.target.src = placeholderImage}
-          />
+          <div className="relative group">
+            <img
+              src={imageUrl}
+              alt={product.title}
+              className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+              onError={(e) => e.target.src = placeholderImage}
+            />
+            <div className="absolute hidden group-hover:block bg-black/80 p-2 rounded-lg z-50 -right-[250px] top-0">
+              <img
+                src={imageUrl}
+                alt={product.title}
+                className="w-[240px] h-[240px] object-cover rounded-lg"
+                onError={(e) => e.target.src = placeholderImage}
+              />
+            </div>
+          </div>
           {!available && (
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
               <span className="text-white font-bold text-lg">Sold Out</span>
