@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const SHOPIFY_STOREFRONT_API = import.meta.env.VITE_SHOPIFY_STOREFRONT_API;
+const STORE_NAME = import.meta.env.VITE_SHOPIFY_STORE_NAME;
 const STOREFRONT_ACCESS_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
+const SHOPIFY_STOREFRONT_API = `https://${STORE_NAME}.myshopify.com/api/2024-01/graphql.json`;
 
 const CartContext = createContext();
 
