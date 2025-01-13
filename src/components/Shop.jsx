@@ -45,7 +45,10 @@ const Shop = () => {
                 edges {
                   node {
                     id
-                    price
+                    price {
+                      amount
+                      currencyCode
+                    }
                     availableForSale
                   }
                 }
@@ -215,7 +218,7 @@ const Shop = () => {
                   <p className="text-gray-400 mb-4 line-clamp-2">{product.description}</p>
                   <div className="flex justify-between items-center">
                     <span className="text-2xl text-white">
-                      ${product.variants.edges[0].node.price}
+                      ${product.variants.edges[0].node.price.amount}
                     </span>
                     <motion.button
                       onClick={() => handleAddToCart(product)}
