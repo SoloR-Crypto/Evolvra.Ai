@@ -196,13 +196,24 @@ const Shop = () => {
         </div>
 
 
-        {loading ? (
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProducts.map((product) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {loading ? (
+            Array.from({ length: 6 }).map((_, index) => (
+              <ProductCard key={`skeleton-${index}`} loading={true} />
+            ))
+          ) : filteredProducts.length === 0 ? (
+            <div className="col-span-3 text-center py-12">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="space-y-4"
+              >
+                <p className="text-gray-400 text-xl">No products found</p>
+                <p className="text-gray-500">Try adjusting your search or filters</p>
+              </motion.div>
+            </div>
+          ) : (
+            filteredProducts.map((product) => (
               <motion.div
                 key={product.id}
                 className="luxury-card group"
@@ -241,9 +252,9 @@ const Shop = () => {
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </div>
-        )}
+            ))
+          )}
+        </div>
         {/* Subscription Plans - Re-added from original */}
         <div className="mt-24">
           <h2 className="premium-heading text-center mb-12">Elite Membership Plans</h2>
