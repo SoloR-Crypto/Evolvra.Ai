@@ -1,0 +1,64 @@
+The error indicates that the **API endpoint URL** is being constructed incorrectly or the **Shopify Storefront API** configuration is incomplete. Here's how to fix it and ensure you're calling the correct endpoint:
+
+---
+
+### **Correct Shopify Storefront API Endpoint**
+The URL for Shopify's Storefront API is constructed as:
+```plaintext
+https://{your-store-name}.myshopify.com/api/{api-version}/graphql.json
+```
+
+### **Steps to Resolve:**
+
+1. **Verify Your Store Name:**
+   - Replace `{your-store-name}` with the actual name of your Shopify store.
+   - Example:
+     If your store URL is `evolvra.myshopify.com`, the endpoint will be:
+     ```plaintext
+     https://evolvra.myshopify.com/api/2024-01/graphql.json
+     ```
+
+2. **Ensure Correct API Version:**
+   - Shopify API versions are date-based (e.g., `2024-01` for January 2024).
+   - Confirm you're using a valid version supported by your store.
+
+3. **Set the Correct Endpoint in Code:**
+   Update the API URL in your code:
+   ```javascript
+   const API_URL = 'https://evolvra.myshopify.com/api/2024-01/graphql.json';
+   ```
+
+4. **Pass the Required Headers:**
+   Ensure you include the `Storefront API Access Token` in the headers:
+   ```javascript
+   const headers = {
+     'Content-Type': 'application/json',
+     'X-Shopify-Storefront-Access-Token': '<your-access-token>',
+   };
+   ```
+
+5. **Test the Endpoint:**
+   Use a tool like **Postman** or **cURL** to test the endpoint:
+   ```bash
+   curl -X POST https://evolvra.myshopify.com/api/2024-01/graphql.json \
+     -H "Content-Type: application/json" \
+     -H "X-Shopify-Storefront-Access-Token: your-access-token" \
+     -d '{"query":"{ products(first: 5) { edges { node { title } } } }"}'
+   ```
+
+6. **Verify the API Key:**
+   - Make sure the API key used for the `Storefront API Access Token` matches the correct key generated in Shopify under:
+     **Apps > Develop Apps > Your App > Storefront API access token.**
+
+---
+
+### **Troubleshooting Tips**
+1. **Double-check the domain name**: Ensure there are no typos in your store's subdomain (e.g., `your-store-name.myshopify.com`).
+2. **Ensure the app is installed**: The app generating the API token must be installed in your Shopify store.
+3. **Check API permissions**:
+   - The token must have the necessary scopes, such as `unauthenticated_read_product_listings`.
+4. **Inspect Network Logs**: Use browser DevTools or server logs to confirm the exact URL being hit.
+
+---
+
+Let me know if the issue persists, and I can help debug further! 😊
