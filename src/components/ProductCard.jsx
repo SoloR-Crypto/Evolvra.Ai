@@ -14,6 +14,9 @@ const ProductCard = ({ product, loading }) => {
   const price = variant?.price;
   const available = variant?.availableForSale;
 
+  const [showChoice, setShowChoice] = useState(false);
+  const [addedAnimation, setAddedAnimation] = useState(false);
+
   const handleAddToCart = async (e) => {
     e.preventDefault();
     if (!available) return;
@@ -28,6 +31,20 @@ const ProductCard = ({ product, loading }) => {
       quantity: 1,
       image: imageUrl
     });
+
+    setAddedAnimation(true);
+    setTimeout(() => setAddedAnimation(false), 1000);
+    setShowChoice(true);
+  };
+
+  const handleContinueShopping = (e) => {
+    e.preventDefault();
+    setShowChoice(false);
+  };
+
+  const handleGoToCheckout = (e) => {
+    e.preventDefault();
+    window.location.href = '/checkout';
   };
 
   if (loading) {
@@ -85,9 +102,13 @@ const ProductCard = ({ product, loading }) => {
             <AnimatePresence>
               <motion.button
                 onClick={handleAddToCart}
-                className={`luxury-button flex items-center space-x-2 ${!available ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`luxury-button flex items-center space-x-2 ${!available ? 'opacity-50 cursor-not-allowed' : ''} ${addedAnimation ? 'bg-green-500' : ''}`}
                 whileHover={available ? { scale: 1.05 } : {}}
                 whileTap={available ? { scale: 0.95 } : {}}
+                animate={addedAnimation ? {
+                  scale: [1, 1.2, 1],
+                  transition: { duration: 0.3 }
+                } : {}}
                 disabled={!available}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -103,6 +124,29 @@ const ProductCard = ({ product, loading }) => {
                 </span>
               </motion.button>
             </AnimatePresence>
+            {showChoice && (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute right-0 top-full mt-2 bg-gray-800 rounded-lg shadow-xl p-4 z-50 w-64"
+              >
+                <p className="text-white mb-3">Item added to cart!</p>
+                <div className="space-y-2">
+                  <button 
+                    onClick={handleContinueShopping}
+                    className="w-full luxury-button py-2"
+                  >
+                    Continue Shopping
+                  </button>
+                  <button 
+                    onClick={handleGoToCheckout}
+                    className="w-full luxury-button py-2 bg-primary-500"
+                  >
+                    Go to Checkout
+                  </button>
+                </div>
+              </motion.div>
+            )}
           </div>
           {available && (
             <div className="mt-4 flex items-center space-x-2 text-primary-400">
