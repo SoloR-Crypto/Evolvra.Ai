@@ -17,20 +17,22 @@ function App() {
     <CartProvider>
       <div className="min-h-screen bg-gray-900">
         <Navbar />
-        <Routes>
-          <Route path="/" element={
-            <>
-              <Hero />
-              <Features />
-              <Shop />
-            </>
-          } />
-          <Route path="/community" element={<Community />} />
-          <Route path="/community/:slug" element={<CommunityPage />} />
-          <Route path="/products/:handle" element={<ProductPage />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={
+              <>
+                <Hero />
+                <Features />
+                <Shop />
+              </>
+            } />
+            <Route path="/community" element={<Community />} />
+            <Route path="/community/:slug" element={<CommunityPage />} />
+            <Route path="/products/:handle" element={<ProductPage />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </CartProvider>
