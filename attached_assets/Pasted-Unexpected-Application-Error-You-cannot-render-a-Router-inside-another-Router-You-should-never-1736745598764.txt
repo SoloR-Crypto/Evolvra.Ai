@@ -1,0 +1,16 @@
+Unexpected Application Error!
+You cannot render a <Router> inside another <Router>. You should never have more than one in your app.
+Error: You cannot render a <Router> inside another <Router>. You should never have more than one in your app.
+    at invariant (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/react-router-dom.js?v=303fa0a0:1190:11)
+    at Router (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/react-router-dom.js?v=303fa0a0:6048:3)
+    at renderWithHooks (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:11566:26)
+    at mountIndeterminateComponent (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:14944:21)
+    at beginWork (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:15932:22)
+    at beginWork$1 (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19779:22)
+    at performUnitOfWork (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19227:20)
+    at workLoopSync (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19163:13)
+    at renderRootSync (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19142:15)
+    at recoverFromConcurrentError (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18762:28)
+💿 Hey developer 👋
+
+You can provide a way better UX than this when your app throws errors by providing your own ErrorBoundary or errorElement prop on your route.
