@@ -1,0 +1,30 @@
+[vite] connecting...
+[vite] connected.
+Attempting to fetch from: https://your-store.myshopify.com/api/2024-01/graphql
+Response status: 401
+Error fetching products: HTTP error! status: 401, body: {"errors":[{"message":"","extensions":{"code":"UNAUTHORIZED"}}]}
+at t.value (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
+Full error: 
+Error {}
+message: "HTTP error! status: 401, body: {"errors":[{"message":"","extensions":{"code":"UNAUTHORIZED"}}]}"
+stack: "Error: HTTP error! status: 401, body: {"errors":[{"message":"","extensions":{"code":"UNAUTHORIZED"}}]}↵ at fetchProducts (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:70:15)"
+get stack: ƒ ()
+set stack: ƒ ()
+[[Prototype]]: Object
+
+Response status: 401
+Error fetching products: HTTP error! status: 401, body: {"errors":[{"message":"","extensions":{"code":"UNAUTHORIZED"}}]}
+at t.value (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
+Full error: 
+Error {}
+message: "HTTP error! status: 401, body: {"errors":[{"message":"","extensions":{"code":"UNAUTHORIZED"}}]}"
+stack: "Error: HTTP error! status: 401, body: {"errors":[{"message":"","extensions":{"code":"UNAUTHORIZED"}}]}↵ at fetchProducts (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:70:15)"
+get stack: ƒ ()
+set stack: ƒ ()
+[[Prototype]]: Object
