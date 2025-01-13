@@ -167,13 +167,13 @@ const Shop = () => {
             />
             <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
           </div>
-          <button
-            onClick={checkout}
+          <Link
+            to="/checkout"
             className="ml-4 px-6 py-3 bg-primary-500 text-white rounded-lg flex items-center space-x-2 hover:bg-primary-600 transition-colors"
           >
             <FaShoppingCart />
             <span>Checkout ({cart.length})</span>
-          </button>
+          </Link>
         </div>
 
         {/* Categories - Re-added from original */}
@@ -222,7 +222,7 @@ const Shop = () => {
                 animate={{ opacity: 1, y: 0 }}
                 whileHover={{ scale: 1.03 }}
               >
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/products/${product.title.toLowerCase().replace(/\s+/g, '-')}`}>
                   <div className="relative overflow-hidden rounded-t-xl">
                     <img
                       src={product.images.edges[0]?.node.url}

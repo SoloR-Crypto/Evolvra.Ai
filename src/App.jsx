@@ -27,7 +27,7 @@ function App() {
           } />
           <Route path="/community" element={<Community />} />
           <Route path="/community/:slug" element={<CommunityPage />} />
-          <Route path="/product/gid:/shopify/Product/:id" element={<ProductPage />} />
+          <Route path="/products/:handle" element={<ProductPage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/checkout" element={<CheckoutPage />} />
         </Routes>
