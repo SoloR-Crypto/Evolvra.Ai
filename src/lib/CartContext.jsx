@@ -87,10 +87,20 @@ export function CartProvider({ children }) {
   };
 
   const checkout = async () => {
+    if (cart.length === 0) {
+      alert('Your cart is empty');
+      return;
+    }
+    
     const checkoutDetails = await createCheckout(cart);
     if (checkoutDetails?.webUrl) {
       setCheckoutUrl(checkoutDetails.webUrl);
-      window.location.href = checkoutDetails.webUrl;
+      const checkoutWindow = window.open(checkoutDetails.webUrl, '_blank');
+      if (!checkoutWindow) {
+        alert('Please allow popups to proceed to checkout');
+      }
+    } else {
+      alert('Unable to create checkout. Please try again.');
     }
   };
 

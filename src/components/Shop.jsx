@@ -222,7 +222,7 @@ const Shop = () => {
                 animate={{ opacity: 1, y: 0 }}
                 whileHover={{ scale: 1.03 }}
               >
-                <Link to={`/product/${product.id}`}>
+                <Link to={`/product/${product.id.replace('gid://shopify/Product/', '')}`}>
                   <div className="relative overflow-hidden rounded-t-xl">
                     <img
                       src={product.images.edges[0]?.node.url}
