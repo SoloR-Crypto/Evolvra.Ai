@@ -33,6 +33,7 @@ const Shop = () => {
           edges {
             node {
               id
+              handle
               title
               description
               images(first: 1) {
@@ -222,7 +223,7 @@ const Shop = () => {
                 animate={{ opacity: 1, y: 0 }}
                 whileHover={{ scale: 1.03 }}
               >
-                <Link to={`/products/${product.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                <Link to={`/products/${product.handle || product.title.toLowerCase().replace(/\s+/g, '-')}`}>
                   <div className="relative overflow-hidden rounded-t-xl">
                     <img
                       src={product.images.edges[0]?.node.url}
