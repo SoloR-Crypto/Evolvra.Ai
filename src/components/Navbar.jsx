@@ -19,6 +19,21 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const navigationItems = ['Shop', 'Community', 'About'];
+  const rightNavigationItems = ['Research', 'Protocols', 'Contact'];
+
+  const getPath = (item) => {
+    switch(item.toLowerCase()) {
+      case 'shop': return '/shop';
+      case 'community': return '/community';
+      case 'about': return '/about';
+      case 'research': return '/research';
+      case 'protocols': return '/protocols';
+      case 'contact': return '/contact';
+      default: return '/';
+    }
+  };
+
   return (
     <motion.nav 
       className={`fixed w-full z-50 nav-gradient nav-glass ${
@@ -39,7 +54,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
               >
                 <Link 
-                  to={item.toLowerCase() === 'community' ? '/community' : '#'} 
+                  to={getPath(item)} 
                   className="text-base font-medium text-gray-300 hover:text-white transition-colors duration-300"
                 >
                   {item}
@@ -76,7 +91,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
               >
                 <Link 
-                  to={item.toLowerCase() === 'shop' ? '/shop' : '#'} 
+                  to={getPath(item)} 
                   className="text-base font-medium text-gray-300 hover:text-white transition-colors duration-300"
                 >
                   {item}
@@ -139,13 +154,7 @@ const Navbar = () => {
                       className="relative group"
                     >
                       <Link
-                        to={
-                          item.toLowerCase() === 'shop' ? '/shop' :
-                          item.toLowerCase() === 'community' ? '/community' :
-                          item.toLowerCase() === 'about' ? '/about' :
-                          item.toLowerCase() === 'contact' ? '/contact' :
-                          `/${item.toLowerCase()}`
-                        }
+                        to={getPath(item)}
                         className="flex items-center space-x-2 text-gray-300 hover:text-white px-4 py-2.5 rounded-lg bg-gray-800/30 backdrop-blur-sm hover:bg-primary-500/10 transition-all duration-300"
                         onClick={() => {
                           setIsMobileMenuOpen(false);

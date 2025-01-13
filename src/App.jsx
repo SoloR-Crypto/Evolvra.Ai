@@ -11,6 +11,9 @@ import CommunityPage from './components/CommunityPage';
 import ProductPage from './components/ProductPage';
 import CheckoutPage from './components/CheckoutPage';
 import Contact from './components/Contact';
+import About from './components/About';
+import Protocols from './components/Protocols';
+import Research from './components/Research';
 import { CartProvider } from './lib/CartContext';
 
 function App() {
@@ -32,6 +35,9 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/protocols" element={<Protocols />} />
+          <Route path="/research" element={<Research />} />
         </Routes>
         <Footer />
       </div>
