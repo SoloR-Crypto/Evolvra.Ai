@@ -1,0 +1,43 @@
+Full error: 
+TypeError {}
+message: "Failed to fetch"
+stack: "TypeError: Failed to fetch↵ at window.fetch (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:218642)↵ at fetchProducts (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:58:30)↵ at https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:16:5↵ at commitHookEffectListMount (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:16934:34)↵ at commitPassiveMountOnFiber (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18187:17)↵ at commitPassiveMountEffects_complete (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18155:17)↵ at commitPassiveMountEffects_begin (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18145:15)↵ at commitPassiveMountEffects (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18135:11)↵ at flushPassiveEffectsImpl (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19516:11)↵ at flushPassiveEffects (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19473:22)"
+get stack: ƒ ()
+set stack: ƒ ()
+[[Prototype]]: Object
+
+Error fetching products: Failed to fetch
+at t.value (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
+Full error: 
+TypeError {}
+message: "Failed to fetch"
+stack: "TypeError: Failed to fetch↵ at window.fetch (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:218642)↵ at fetchProducts (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:58:30)↵ at https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:16:5↵ at commitHookEffectListMount (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:16934:34)↵ at invokePassiveEffectMountInDEV (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18350:19)↵ at invokeEffectsInDev (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19727:19)↵ at commitDoubleInvokeEffectsInDEV (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19712:15)↵ at flushPassiveEffectsImpl (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19529:13)↵ at flushPassiveEffects (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19473:22)↵ at https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19354:17"
+get stack: ƒ ()
+set stack: ƒ ()
+[[Prototype]]: Object
+
+Failed to fetch
+at window.fetch (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:218642)
+at fetchProducts (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:58:30)
+at https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:16:5
+at commitHookEffectListMount (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:16934:34)
+at commitPassiveMountOnFiber (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18187:17)
+at commitPassiveMountEffects_complete (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18155:17)
+at commitPassiveMountEffects_begin (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18145:15)
+at commitPassiveMountEffects (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18135:11)
+at flushPassiveEffectsImpl (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19516:11)
+at flushPassiveEffects (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19473:22)
+Failed to fetch
+at window.fetch (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/__replco/static/devtools/eruda/3.2.3/eruda.js:2:218642)
+at fetchProducts (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:58:30)
+at https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/src/components/Shop.jsx:16:5
+at commitHookEffectListMount (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:16934:34)
+at invokePassiveEffectMountInDEV (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:18350:19)
+at invokeEffectsInDev (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19727:19)
+at commitDoubleInvokeEffectsInDEV (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19712:15)
+at flushPassiveEffectsImpl (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19529:13)
+at flushPassiveEffects (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19473:22)
+at https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/chunk-ZUD27R6Z.js?v=303fa0a0:19354:17
