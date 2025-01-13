@@ -1,0 +1,156 @@
+Based on the **response** provided, it looks like the Shopify Storefront API successfully fetched product data. Below is a detailed explanation and next steps to properly use this data to render a shop page:
+
+---
+
+### **1. Response Structure**
+Your response contains:
+- **Products**: Each product is listed under `products.edges`.
+- **Fields for Each Product**:
+  - `id`: Unique identifier for the product.
+  - `title`: Name of the product.
+  - `description`: Detailed product information.
+  - `images`: Contains image URLs for the product.
+  - `variants`: Details like price, availability, and variant ID.
+
+### **Example Response Breakdown**:
+Here’s an example for a single product:
+
+```json
+{
+  "id": "gid://shopify/Product/9288256225608",
+  "title": "(Sample) Coconut Bar Soap",
+  "description": "Coconut Bar Soap is perfect for everyday cleansing...",
+  "images": {
+    "edges": [
+      {
+        "node": {
+          "url": "https://cdn.shopify.com/s/files/1/0874/0100/5384/files/Soap-Image1.png?v=1736602423"
+        }
+      }
+    ]
+  },
+  "variants": {
+    "edges": [
+      {
+        "node": {
+          "id": "gid://shopify/ProductVariant/49663873286472",
+          "price": {
+            "amount": "0.0",
+            "currencyCode": "EUR"
+          },
+          "availableForSale": false
+        }
+      }
+    ]
+  }
+}
+```
+
+---
+
+### **2. Frontend Code to Display the Products**
+Here’s how you can dynamically display this data on your shop page:
+
+#### **React Example**
+```javascript
+import React from "react";
+
+const ShopPage = ({ products }) => {
+  return (
+    <div className="grid grid-cols-3 gap-4 p-8">
+      {products.map(({ node: product }) => {
+        const { id, title, description, images, variants } = product;
+        const imageUrl = images.edges[0]?.node.url || "placeholder.jpg";
+        const price = variants.edges[0]?.node.price.amount || "N/A";
+        const available = variants.edges[0]?.node.availableForSale;
+
+        return (
+          <div key={id} className="border shadow-md p-4 rounded-lg">
+            <img src={imageUrl} alt={title} className="w-full rounded-md" />
+            <h2 className="text-lg font-bold mt-2">{title}</h2>
+            <p className="text-sm text-gray-600 mt-2">{description}</p>
+            <p className="text-md font-semibold mt-2">
+              {available ? `€${price}` : "Out of Stock"}
+            </p>
+            {available && (
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4">
+                Add to Cart
+              </button>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default ShopPage;
+```
+
+#### **Expected Output:**
+- A responsive grid layout of product cards.
+- Each card displays:
+  - Product image.
+  - Title.
+  - Description.
+  - Price.
+  - Availability status.
+
+---
+
+### **3. Handling Edge Cases**
+1. **No Image:**
+   - Provide a placeholder image when no image is available:
+     ```javascript
+     const imageUrl = images.edges[0]?.node.url || "placeholder.jpg";
+     ```
+
+2. **Out-of-Stock Products:**
+   - Hide the "Add to Cart" button if `availableForSale` is `false`:
+     ```javascript
+     {available && <button>Add to Cart</button>}
+     ```
+
+3. **Empty Data:**
+   - Check if `products.edges` is empty and show a message:
+     ```javascript
+     if (!products || products.edges.length === 0) {
+       return <p>No products available.</p>;
+     }
+     ```
+
+---
+
+### **4. Adding Functionality for "Add to Cart"**
+Use Shopify’s `cartCreate` and `cartLinesAdd` mutations to implement the cart functionality.
+
+#### **Example Mutation:**
+```javascript
+mutation AddToCart($cartId: ID!, $lines: [CartLineInput!]!) {
+  cartLinesAdd(cartId: $cartId, lines: $lines) {
+    cart {
+      id
+      lines(first: 10) {
+        edges {
+          node {
+            id
+            quantity
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+### **5. Next Steps**
+1. **Render Data Dynamically:**
+   - Pass the API response to the frontend as a prop.
+2. **Pagination (Optional):**
+   - Use `pageInfo.hasNextPage` and cursors to load additional products dynamically.
+3. **Enhance UI:**
+   - Add hover effects, loading spinners, or animations for a better user experience.
+
+Let me know if you’d like help implementing specific parts or debugging further! 😊
