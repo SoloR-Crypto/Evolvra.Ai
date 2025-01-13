@@ -19,6 +19,12 @@ const Shop = () => {
   }, []);
 
   const fetchProducts = async () => {
+    if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
+      console.error('Missing Shopify API credentials');
+      setLoading(false);
+      return;
+    }
+
     const query = `
       query {
         products(first: 20) {
