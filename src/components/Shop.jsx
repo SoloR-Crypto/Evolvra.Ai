@@ -50,6 +50,10 @@ const Shop = () => {
     `;
 
     try {
+      if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
+        throw new Error('Missing Shopify API credentials');
+      }
+
       const response = await fetch(SHOPIFY_STOREFRONT_API, {
         method: 'POST',
         headers: {
@@ -59,11 +63,25 @@ const Shop = () => {
         body: JSON.stringify({ query }),
       });
 
-      const { data } = await response.json();
-      setProducts(data.products.edges.map(edge => edge.node));
-      setLoading(false);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const text = await response.text();
+      if (!text) {
+        throw new Error('Empty response from server');
+      }
+
+      const json = JSON.parse(text);
+      if (!json.data || !json.data.products) {
+        throw new Error('Invalid response format');
+      }
+
+      setProducts(json.data.products.edges.map(edge => edge.node));
     } catch (error) {
       console.error('Error fetching products:', error);
+      setProducts([]); // Set empty products on error
+    } finally {
       setLoading(false);
     }
   };
