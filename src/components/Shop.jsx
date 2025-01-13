@@ -4,9 +4,8 @@ import { FaShoppingCart, FaSearch, FaLeaf, FaDna, FaBrain, FaFlask } from 'react
 import { Link } from 'react-router-dom';
 import { useCart } from '../lib/CartContext';
 
-const SHOP_NAME = import.meta.env.VITE_SHOPIFY_STORE_NAME;
 const STOREFRONT_ACCESS_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
-const SHOPIFY_STOREFRONT_API = `https://${SHOP_NAME}.myshopify.com/api/2024-01/graphql`;
+const SHOPIFY_STOREFRONT_API = import.meta.env.VITE_SHOPIFY_STORE_URL || 'https://your-store.myshopify.com/api/2024-01/graphql';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -68,6 +67,8 @@ const Shop = () => {
         headers: {
           'Content-Type': 'application/json',
           'X-Shopify-Storefront-Access-Token': STOREFRONT_ACCESS_TOKEN,
+          'Accept': 'application/json',
+          'Origin': window.location.origin,
         },
         body: JSON.stringify({ query }),
       });
