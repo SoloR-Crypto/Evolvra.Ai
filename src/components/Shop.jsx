@@ -13,7 +13,7 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState('All'); // Re-added from original
   const { cart, addToCart, checkout } = useCart();
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const Shop = () => {
       console.log('Store name:', STORE_NAME);
       console.log('API URL:', SHOPIFY_STOREFRONT_API);
       console.log('Token present:', !!STOREFRONT_ACCESS_TOKEN);
-
+      
       const response = await fetch(SHOPIFY_STOREFRONT_API, {
         method: 'POST',
         headers: {
@@ -108,7 +108,7 @@ const Shop = () => {
     } catch (error) {
       console.error('Error fetching products:', error.message);
       console.error('Full error:', error);
-      setProducts([]);
+      setProducts([]); // Set empty products on error
     } finally {
       setLoading(false);
     }
@@ -132,7 +132,7 @@ const Shop = () => {
     });
   };
 
-  const categories = [
+  const categories = [ // Re-added from original
     { name: 'All', icon: <FaLeaf /> },
     { name: 'Nootropics', icon: <FaBrain /> },
     { name: 'Supplements', icon: <FaDna /> },
@@ -141,7 +141,7 @@ const Shop = () => {
     { name: 'Ceremonial Tools', icon: <FaFlask /> }
   ];
 
-  const filteredProducts = activeCategory === 'All'
+  const filteredProducts = activeCategory === 'All' // Re-added from original
     ? products.filter(product =>
         product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase())
@@ -149,6 +149,7 @@ const Shop = () => {
     : products.filter(product =>
         (product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           product.description.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        //This part is a guess, there's no category field in the shopify data.  Needs adjustment to match Shopify data structure if different.
         product.title.includes(activeCategory)
       );
 
@@ -176,6 +177,7 @@ const Shop = () => {
           </Link>
         </div>
 
+        {/* Categories - Re-added from original */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map((category) => (
             <motion.button
@@ -196,7 +198,7 @@ const Shop = () => {
         </div>
 
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"> {/*This line was changed */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {loading ? (
             Array.from({ length: window.innerWidth < 768 ? 6 : 8 }).map((_, index) => (
               <ProductCard key={`skeleton-${index}`} loading={true} />
@@ -255,6 +257,7 @@ const Shop = () => {
             ))
           )}
         </div>
+        {/* Subscription Plans - Re-added from original */}
         <div className="mt-24">
           <h2 className="premium-heading text-center mb-12">Elite Membership Plans</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
