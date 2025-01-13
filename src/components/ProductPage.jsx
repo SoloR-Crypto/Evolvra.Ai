@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -11,60 +10,53 @@ const SHOPIFY_STOREFRONT_API = `https://${STORE_NAME}.myshopify.com/api/2024-01/
 
 const ProductPage = () => {
   const { handle } = useParams();
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const { addToCart } = useCart();
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetchProduct();
-  }, [id]);
+  }, [handle]);
 
-  const fetchProduct = async () => {
-    const query = `
-      query getProduct($id: ID!) {
-        product(id: $id) {
-          id
-          title
-          description
-          descriptionHtml
-          vendor
-          productType
-          images(first: 5) {
-            edges {
-              node {
-                url
-                altText
-              }
+  const query = `
+    query getProductByHandle($handle: String!) {
+      product(handle: $handle) {
+        id
+        title
+        description
+        descriptionHtml
+        vendor
+        productType
+        images(first: 5) {
+          edges {
+            node {
+              url
+              altText
             }
           }
-          variants(first: 1) {
-            edges {
-              node {
-                id
-                price {
-                  amount
-                  currencyCode
-                }
-                availableForSale
-                quantityAvailable
+        }
+        variants(first: 1) {
+          edges {
+            node {
+              id
+              price {
+                amount
+                currencyCode
               }
-            }
-          }
-          metafields(first: 10) {
-            edges {
-              node {
-                key
-                value
-              }
+              availableForSale
+              quantityAvailable
             }
           }
         }
       }
-    `;
+    }
+  `;
 
+  const fetchProduct = async () => {
     try {
       const response = await fetch(SHOPIFY_STOREFRONT_API, {
         method: 'POST',
@@ -74,7 +66,7 @@ const ProductPage = () => {
         },
         body: JSON.stringify({
           query,
-          variables: { id }
+          variables: { handle }
         }),
       });
 
@@ -124,7 +116,7 @@ const ProductPage = () => {
 
   const handleAddToCart = async () => {
     if (!variant.availableForSale) return;
-    
+
     await addToCart({
       variantId: variant.id,
       title: product.title,
@@ -155,7 +147,7 @@ const ProductPage = () => {
                 className="w-full h-full object-cover"
               />
             </motion.div>
-            
+
             <div className="grid grid-cols-4 gap-4">
               {images.map((img, idx) => (
                 <motion.button
