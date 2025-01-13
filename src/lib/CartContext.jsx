@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const SHOPIFY_STOREFRONT_API = process.env.SHOPIFY_STOREFRONT_API;
-const STOREFRONT_ACCESS_TOKEN = process.env.SHOPIFY_STOREFRONT_TOKEN;
+const SHOPIFY_STOREFRONT_API = import.meta.env.VITE_SHOPIFY_STOREFRONT_API;
+const STOREFRONT_ACCESS_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
 
 const CartContext = createContext();
 
