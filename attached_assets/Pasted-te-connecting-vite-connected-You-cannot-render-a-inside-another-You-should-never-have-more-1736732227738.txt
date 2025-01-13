@@ -1,0 +1,34 @@
+te] connecting...
+[vite] connected.
+You cannot render a  inside another . You should never have more than one in your app.
+Error handled by React Router default ErrorBoundary: 
+Error {}
+
+Error handled by React Router default ErrorBoundary: 
+Error {}
+
+You cannot render a  inside another . You should never have more than one in your app.
+Error handled by React Router default ErrorBoundary: 
+Error {}
+
+Error handled by React Router default ErrorBoundary: 
+Error {}
+
+The above error occurred in the <Router> component:
+
+    at Router (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/react-router-dom.js?v=de1dc535:4496:15)
+    at BrowserRouter (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/react-router-dom.js?v=de1dc535:5245:5)
+    at App
+    at RenderedRoute (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/react-router-dom.js?v=de1dc535:4082:5)
+    at RenderErrorBoundary (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/react-router-dom.js?v=de1dc535:4042:5)
+    at DataRoutes (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/react-router-dom.js?v=de1dc535:5237:5)
+    at Router (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/react-router-dom.js?v=de1dc535:4496:15)
+    at RouterProvider (https://f2d7d838-a1b9-4afc-83b7-de0d78f54888-00-o1hdw77jai55.picard.repl.co/node_modules/.vite/deps/react-router-dom.js?v=de1dc535:5051:5)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, RenderErrorBoundary.
+React Router caught the following error during render 
+Error {}
+ 
+Object {componentStack: "↵    at Router…"}
+
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
