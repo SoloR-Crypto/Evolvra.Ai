@@ -139,9 +139,17 @@ const Navbar = () => {
                       className="relative group"
                     >
                       <Link
-                        to={item.toLowerCase() === 'community' ? '/community' : '#'}
+                        to={
+                          item.toLowerCase() === 'shop' ? '/shop' :
+                          item.toLowerCase() === 'community' ? '/community' :
+                          item.toLowerCase() === 'about' ? '/about' :
+                          item.toLowerCase() === 'contact' ? '/contact' :
+                          `/${item.toLowerCase()}`
+                        }
                         className="flex items-center space-x-2 text-gray-300 hover:text-white px-4 py-2.5 rounded-lg bg-gray-800/30 backdrop-blur-sm hover:bg-primary-500/10 transition-all duration-300"
-                        onClick={() => setIsMobileMenuOpen(false)}
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                        }}
                       >
                         <span className="text-lg font-medium">{item}</span>
                         <div className="absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-primary-400/50 to-primary-300/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
