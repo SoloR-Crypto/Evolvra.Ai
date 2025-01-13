@@ -97,7 +97,7 @@ export function CartProvider({ children }) {
     const checkoutDetails = await createCheckout(cart);
     if (checkoutDetails?.webUrl) {
       setCheckoutUrl(checkoutDetails.webUrl);
-      navigate(checkoutDetails.webUrl); // Changed to use navigate
+      window.location.href = checkoutDetails.webUrl;
     } else {
       alert('Unable to create checkout. Please try again.');
     }

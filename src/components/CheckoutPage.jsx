@@ -50,7 +50,12 @@ const CheckoutPage = () => {
                 </div>
 
                 <button
-                  onClick={checkout}
+                  onClick={() => {
+                    const checkoutBtn = document.createElement('a');
+                    checkoutBtn.href = checkoutUrl;
+                    checkoutBtn.target = '_blank';
+                    checkoutBtn.click();
+                  }}
                   className="w-full luxury-button py-4 text-lg"
                 >
                   Proceed to Payment
