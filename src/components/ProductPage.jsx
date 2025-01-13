@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaShoppingCart, FaLeaf } from 'react-icons/fa';
 import { useCart } from '../lib/CartContext';

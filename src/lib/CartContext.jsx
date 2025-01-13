@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Added import
 
 const STORE_NAME = import.meta.env.VITE_SHOPIFY_STORE_NAME;
 const STOREFRONT_ACCESS_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
@@ -12,6 +13,7 @@ export function CartProvider({ children }) {
     return savedCart ? JSON.parse(savedCart) : [];
   });
   const [checkoutUrl, setCheckoutUrl] = useState(null);
+  const navigate = useNavigate(); // Added useNavigate
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -91,14 +93,11 @@ export function CartProvider({ children }) {
       alert('Your cart is empty');
       return;
     }
-    
+
     const checkoutDetails = await createCheckout(cart);
     if (checkoutDetails?.webUrl) {
       setCheckoutUrl(checkoutDetails.webUrl);
-      const checkoutWindow = window.open(checkoutDetails.webUrl, '_blank');
-      if (!checkoutWindow) {
-        alert('Please allow popups to proceed to checkout');
-      }
+      navigate(checkoutDetails.webUrl); // Changed to use navigate
     } else {
       alert('Unable to create checkout. Please try again.');
     }
