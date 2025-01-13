@@ -57,11 +57,16 @@ const Shop = () => {
     `;
 
     try {
-      if (!SHOPIFY_STOREFRONT_API || !STOREFRONT_ACCESS_TOKEN) {
+      if (!STORE_NAME || !STOREFRONT_ACCESS_TOKEN) {
+        console.error('Missing required environment variables:');
+        console.error('STORE_NAME:', !!STORE_NAME);
+        console.error('STOREFRONT_ACCESS_TOKEN:', !!STOREFRONT_ACCESS_TOKEN);
         throw new Error('Missing Shopify API credentials');
       }
 
-      console.log('Attempting to fetch from:', SHOPIFY_STOREFRONT_API);
+      console.log('Store name:', STORE_NAME);
+      console.log('API URL:', SHOPIFY_STOREFRONT_API);
+      console.log('Token present:', !!STOREFRONT_ACCESS_TOKEN);
       
       const response = await fetch(SHOPIFY_STOREFRONT_API, {
         method: 'POST',
