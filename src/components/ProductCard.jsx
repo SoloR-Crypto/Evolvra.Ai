@@ -14,6 +14,10 @@ const ProductCard = ({ product, loading }) => {
   const price = variant?.price;
   const available = variant?.availableForSale;
 
+  const [showModal, setShowModal] = useState(false);
+  const [showAddedEffect, setShowAddedEffect] = useState(false);
+  const navigate = useNavigate();
+
   const handleAddToCart = async (e) => {
     e.preventDefault();
     if (!available) return;
@@ -28,6 +32,19 @@ const ProductCard = ({ product, loading }) => {
       quantity: 1,
       image: imageUrl
     });
+
+    setShowAddedEffect(true);
+    setTimeout(() => setShowAddedEffect(false), 1000);
+    setShowModal(true);
+  };
+
+  const handleContinueShopping = () => {
+    setShowModal(false);
+  };
+
+  const handleGoToCheckout = () => {
+    setShowModal(false);
+    navigate('/checkout');
   };
 
   if (loading) {
@@ -117,6 +134,48 @@ const ProductCard = ({ product, loading }) => {
             </div>
           )}
         </div>
+        {showAddedEffect && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-full"
+          >
+            Added!
+          </motion.div>
+        )}
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            onClick={handleContinueShopping}
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              className="bg-gray-800 p-6 rounded-xl shadow-xl max-w-sm mx-4"
+              onClick={e => e.stopPropagation()}
+            >
+              <h3 className="text-xl font-bold text-white mb-4">Item Added to Cart!</h3>
+              <div className="flex gap-4">
+                <button
+                  onClick={handleContinueShopping}
+                  className="flex-1 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                >
+                  Continue Shopping
+                </button>
+                <button
+                  onClick={handleGoToCheckout}
+                  className="flex-1 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+                >
+                  Go to Checkout
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
       </motion.div>
     </Link>
   );
