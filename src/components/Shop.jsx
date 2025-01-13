@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaShoppingCart, FaSearch, FaLeaf, FaDna, FaBrain, FaFlask } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useCart } from '../lib/CartContext';
+import ProductCard from './ProductCard';
 
 const STORE_NAME = import.meta.env.VITE_SHOPIFY_STORE_NAME;
 const STOREFRONT_ACCESS_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
