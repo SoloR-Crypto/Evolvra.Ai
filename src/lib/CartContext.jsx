@@ -101,13 +101,13 @@ export function CartProvider({ children }) {
     });
   };
 
-  const checkout = async () => {
+  const checkout = async (shippingInfo) => {
     if (cart.length === 0) {
       alert('Your cart is empty');
       return;
     }
 
-    const checkoutDetails = await createCheckout(cart);
+    const checkoutDetails = await createCheckout(cart, shippingInfo);
     if (checkoutDetails?.webUrl) {
       setCheckoutUrl(checkoutDetails.webUrl);
       window.location.href = checkoutDetails.webUrl;

@@ -6,15 +6,32 @@ import { FaTrash, FaMinus, FaPlus, FaLock, FaCreditCard, FaPaypal } from 'react-
 
 const CheckoutPage = () => {
   const { cart, removeFromCart, updateQuantity, checkout } = useCart();
+  const [formData, setFormData] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+    address: '',
+    city: '',
+    state: '',
+    zip: ''
+  });
+  const [paymentMethod, setPaymentMethod] = useState('credit');
   const total = cart.reduce((sum, item) => sum + (item.price.amount * item.quantity), 0);
   const shipping = total > 200 ? 0 : 15.00;
 
-  useEffect(() => {
-    // Initialize Shopify elements
-    const shopifyScript = document.createElement('script');
-    shopifyScript.src = 'https://cdn.shopify.com/shopifycloud/checkout-web/assets/runtime.latest.en.8645d252f07ec25fdbc6.js';
-    document.head.appendChild(shopifyScript);
-  }, []);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Save shipping info to Shopify checkout
+    await checkout(formData);
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 pt-24 pb-12">
@@ -95,40 +112,90 @@ const CheckoutPage = () => {
 
             <div className="luxury-card p-6">
               <h2 className="text-xl font-bold text-white mb-6">Shipping Information</h2>
-              <div className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label className="block text-gray-400 mb-2">Email</label>
-                  <input type="email" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white" />
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary-500 transition-colors" 
+                  />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-gray-400 mb-2">First Name</label>
-                    <input type="text" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white" />
+                    <input 
+                      type="text" 
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary-500 transition-colors" 
+                    />
                   </div>
                   <div>
                     <label className="block text-gray-400 mb-2">Last Name</label>
-                    <input type="text" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white" />
+                    <input 
+                      type="text" 
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary-500 transition-colors" 
+                    />
                   </div>
                 </div>
                 <div>
                   <label className="block text-gray-400 mb-2">Address</label>
-                  <input type="text" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white" />
+                  <input 
+                    type="text" 
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary-500 transition-colors" 
+                  />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div>
                     <label className="block text-gray-400 mb-2">City</label>
-                    <input type="text" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white" />
+                    <input 
+                      type="text" 
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary-500 transition-colors" 
+                    />
                   </div>
                   <div>
                     <label className="block text-gray-400 mb-2">State</label>
-                    <input type="text" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white" />
+                    <input 
+                      type="text" 
+                      name="state"
+                      value={formData.state}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary-500 transition-colors" 
+                    />
                   </div>
                   <div>
                     <label className="block text-gray-400 mb-2">ZIP</label>
-                    <input type="text" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white" />
+                    <input 
+                      type="text" 
+                      name="zip"
+                      value={formData.zip}
+                      onChange={handleInputChange}
+                      required
+                      pattern="[0-9]*"
+                      className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:border-primary-500 transition-colors" 
+                    />
                   </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
 
