@@ -189,10 +189,10 @@ const ProductPage = () => {
             </div>
 
             <motion.div 
-              className="prose prose-invert max-w-none"
+              className="luxury-description"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
               dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
             />
 

@@ -78,6 +78,28 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-primary-400 to-primary-300
            animate-gradient bg-300% font-bold;
   }
+
+  .luxury-description {
+    @apply text-white/90 leading-relaxed tracking-wide font-light
+           text-lg backdrop-blur-sm relative z-10
+           border-l-2 border-primary-500/30 pl-6
+           animate-fade-in;
+  }
+
+  .luxury-description p {
+    @apply mb-6 first-letter:text-3xl first-letter:font-semibold
+           first-letter:mr-1 first-letter:float-left
+           first-letter:text-primary-400;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
 }
 
 @keyframes gradient {
