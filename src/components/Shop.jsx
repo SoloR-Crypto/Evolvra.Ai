@@ -114,10 +114,17 @@ const Shop = () => {
 
   const handleAddToCart = async (product) => {
     const variant = product.variants.edges[0].node;
+    if (!variant.availableForSale) {
+      console.log('Product not available for sale');
+      return;
+    }
     await addToCart({
       variantId: variant.id,
       title: product.title,
-      price: variant.price,
+      price: {
+        amount: Number(variant.price.amount),
+        currencyCode: variant.price.currencyCode
+      },
       quantity: 1,
       image: product.images.edges[0]?.node.url
     });
@@ -218,7 +225,7 @@ const Shop = () => {
                   <p className="text-gray-400 mb-4 line-clamp-2">{product.description}</p>
                   <div className="flex justify-between items-center">
                     <span className="text-2xl text-white">
-                      ${product.variants.edges[0].node.price.amount}
+                      {Number(product.variants.edges[0].node.price.amount).toFixed(2)} {product.variants.edges[0].node.price.currencyCode}
                     </span>
                     <motion.button
                       onClick={() => handleAddToCart(product)}
