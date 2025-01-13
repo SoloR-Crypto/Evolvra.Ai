@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useCart } from '../lib/CartContext';
 import { FaTrash, FaMinus, FaPlus, FaLock, FaCreditCard, FaPaypal } from 'react-icons/fa';
