@@ -1,5 +1,6 @@
+
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { CartProvider } from './lib/CartContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -13,8 +14,7 @@ import ProductPage from './components/ProductPage'
 
 const App = () => {
   return (
-    <Router>
-      <CartProvider>
+    <CartProvider>
       <div className="min-h-screen bg-gray-900">
         <Navbar />
         <Routes>
@@ -33,7 +33,6 @@ const App = () => {
         <Footer />
       </div>
     </CartProvider>
-    </Router>
   )
 }
 

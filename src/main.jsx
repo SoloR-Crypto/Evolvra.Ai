@@ -1,15 +1,13 @@
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { 
-  createBrowserRouter,
-  RouterProvider,
-} from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import './index.css'
 
 const router = createBrowserRouter([
   {
-    path: "/*",
+    path: "*",
     element: <App />,
   }
 ], {
@@ -17,7 +15,7 @@ const router = createBrowserRouter([
     v7_startTransition: true,
     v7_relativeSplatPath: true
   }
-});
+})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
