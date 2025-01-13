@@ -32,7 +32,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Left Navigation - Hidden on Mobile */}
           <div className="hidden md:flex space-x-8">
-            {['Protocols', 'Research', 'Community'].map((item, i) => (
+            {['Shop', 'Protocols', 'Research'].map((item, i) => (
               <motion.div
                 key={i}
                 className="relative group"
@@ -69,7 +69,7 @@ const Navbar = () => {
 
           {/* Right Navigation - Hidden on Mobile */}
           <div className="hidden md:flex space-x-8">
-            {['Shop', 'About', 'Contact'].map((item, i) => (
+            {['Community', 'About', 'Contact'].map((item, i) => (
               <motion.div
                 key={i}
                 className="relative group"
@@ -130,7 +130,7 @@ const Navbar = () => {
             >
               <div className="glass-card rounded-xl border border-gray-700/30 p-4">
                 <div className="flex flex-col space-y-3">
-                  {['Protocols', 'Research', 'Community', 'Shop', 'About', 'Contact'].map((item, i) => (
+                  {['Shop', 'Protocols', 'Research', 'Community', 'About', 'Contact'].map((item, i) => (
                     <motion.div
                       key={i}
                       initial={{ x: -20, opacity: 0 }}
