@@ -60,6 +60,8 @@ const Shop = () => {
         throw new Error('Missing Shopify API credentials');
       }
 
+      console.log('Attempting to fetch from:', SHOPIFY_STOREFRONT_API);
+      
       const response = await fetch(SHOPIFY_STOREFRONT_API, {
         method: 'POST',
         headers: {
@@ -69,23 +71,30 @@ const Shop = () => {
         body: JSON.stringify({ query }),
       });
 
+      console.log('Response status:', response.status);
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
       }
 
       const text = await response.text();
+      console.log('Response text:', text);
+
       if (!text) {
         throw new Error('Empty response from server');
       }
 
       const json = JSON.parse(text);
       if (!json.data || !json.data.products) {
+        console.error('Invalid response:', json);
         throw new Error('Invalid response format');
       }
 
       setProducts(json.data.products.edges.map(edge => edge.node));
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error('Error fetching products:', error.message);
+      console.error('Full error:', error);
       setProducts([]); // Set empty products on error
     } finally {
       setLoading(false);
