@@ -74,13 +74,7 @@ const ProductCard = ({ product, loading }) => {
         </div>
 
         <div className="p-6">
-          <Link 
-            to={`/product/${product.id}`}
-            onClick={(e) => e.stopPropagation()}
-            className="block hover:text-primary-400 transition-colors duration-300"
-          >
-            <h3 className="text-xl font-bold text-white mb-2">{product.title}</h3>
-          </Link>
+          <h3 className="text-xl font-bold text-white mb-2">{product.title}</h3>
           <p className="text-gray-400 mb-4 line-clamp-2">{product.description}</p>
           <div className="flex justify-between items-center">
             <span className="text-2xl text-white">
