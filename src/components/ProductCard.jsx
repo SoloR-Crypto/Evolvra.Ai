@@ -52,13 +52,13 @@ const ProductCard = ({ product, loading }) => {
   }
 
   return (
-    <motion.div
-      className="luxury-card group"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.03 }}
-    >
-      <Link to={`/product/${product.id}`} className="block">
+    <Link to={`/product/${product.id}`}>
+      <motion.div
+        className="luxury-card group cursor-pointer"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileHover={{ scale: 1.03 }}
+      >
         <div className="relative overflow-hidden rounded-t-xl">
           <img
             src={imageUrl}
@@ -111,8 +111,8 @@ const ProductCard = ({ product, loading }) => {
             </div>
           )}
         </div>
-      </Link>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 };
 
