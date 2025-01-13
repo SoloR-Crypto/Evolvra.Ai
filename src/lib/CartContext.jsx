@@ -88,6 +88,19 @@ export function CartProvider({ children }) {
     setCart(prevCart => prevCart.filter(item => item.variantId !== variantId));
   };
 
+  const updateQuantity = (variantId, newQuantity) => {
+    setCart(prevCart => {
+      if (newQuantity === 0) {
+        return prevCart.filter(item => item.variantId !== variantId);
+      }
+      return prevCart.map(item =>
+        item.variantId === variantId
+          ? { ...item, quantity: newQuantity }
+          : item
+      );
+    });
+  };
+
   const checkout = async () => {
     if (cart.length === 0) {
       alert('Your cart is empty');
@@ -107,7 +120,8 @@ export function CartProvider({ children }) {
     <CartContext.Provider value={{ 
       cart, 
       addToCart, 
-      removeFromCart, 
+      removeFromCart,
+      updateQuantity,
       checkout,
       checkoutUrl 
     }}>
