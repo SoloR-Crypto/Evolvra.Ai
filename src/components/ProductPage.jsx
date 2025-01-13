@@ -221,15 +221,22 @@ const ProductPage = () => {
             </motion.div>
 
             <motion.button
-              className="w-full luxury-button py-4 text-lg flex items-center justify-center space-x-3"
+              className="w-full luxury-button py-4 text-lg flex items-center justify-center space-x-3 relative overflow-hidden group"
               onClick={handleAddToCart}
               disabled={!variant.availableForSale}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ 
+                scale: 1.02,
+                boxShadow: "0 0 20px rgba(79, 209, 197, 0.5)"
+              }}
+              whileTap={{ 
+                scale: 0.98,
+                boxShadow: "0 0 10px rgba(79, 209, 197, 0.3)"
+              }}
             >
+              <span className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
               <FaShoppingCart className="text-xl" />
               <span>{variant.availableForSale ? 'Add to Cart' : 'Sold Out'}</span>
             </motion.button>

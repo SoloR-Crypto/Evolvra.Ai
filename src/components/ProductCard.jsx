@@ -91,14 +91,21 @@ const ProductCard = ({ product, loading }) => {
             <AnimatePresence>
               <motion.button
                 onClick={handleAddToCart}
-                className={`luxury-button flex items-center space-x-2 ${!available ? 'opacity-50 cursor-not-allowed' : ''}`}
-                whileHover={available ? { scale: 1.05 } : {}}
-                whileTap={available ? { scale: 0.95 } : {}}
+                className={`luxury-button flex items-center space-x-2 relative overflow-hidden ${!available ? 'opacity-50 cursor-not-allowed' : ''}`}
+                whileHover={available ? { 
+                  scale: 1.05,
+                  boxShadow: "0 0 15px rgba(79, 209, 197, 0.5)"
+                } : {}}
+                whileTap={available ? { 
+                  scale: 0.95,
+                  boxShadow: "0 0 5px rgba(79, 209, 197, 0.3)"
+                } : {}}
                 disabled={!available}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
+                <span className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
                 <FaShoppingCart />
                 <span>
                   {available
