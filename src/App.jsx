@@ -10,6 +10,7 @@ import Community from './components/Community';
 import CommunityPage from './components/CommunityPage';
 import ProductPage from './components/ProductPage';
 import CheckoutPage from './components/CheckoutPage';
+import Contact from './components/Contact';
 import { CartProvider } from './lib/CartContext';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/products/:handle" element={<ProductPage />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </div>
