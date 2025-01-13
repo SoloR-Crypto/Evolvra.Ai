@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,8 @@ import { FaLeaf } from 'react-icons/fa';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const menuItems = ['Shop', 'Protocols', 'Research', 'Community', 'About', 'Contact'];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,14 +35,14 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Left Navigation - Hidden on Mobile */}
           <div className="hidden md:flex space-x-8">
-            {['Protocols', 'Research', 'Community'].map((item, i) => (
+            {menuItems.slice(0, 3).map((item, i) => (
               <motion.div
                 key={i}
                 className="relative group"
                 whileHover={{ scale: 1.05 }}
               >
                 <Link 
-                  to={item.toLowerCase() === 'community' ? '/community' : '#'} 
+                  to={`/${item.toLowerCase()}`}
                   className="text-base font-medium text-gray-300 hover:text-white transition-colors duration-300"
                 >
                   {item}
@@ -69,14 +72,14 @@ const Navbar = () => {
 
           {/* Right Navigation - Hidden on Mobile */}
           <div className="hidden md:flex space-x-8">
-            {['Shop', 'About', 'Contact'].map((item, i) => (
+            {menuItems.slice(3).map((item, i) => (
               <motion.div
                 key={i}
                 className="relative group"
                 whileHover={{ scale: 1.05 }}
               >
                 <Link 
-                  to={item.toLowerCase() === 'shop' ? '/shop' : '#'} 
+                  to={`/${item.toLowerCase()}`}
                   className="text-base font-medium text-gray-300 hover:text-white transition-colors duration-300"
                 >
                   {item}
@@ -87,35 +90,34 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button 
-              className="text-gray-300 hover:text-white transition-colors duration-300"
-              onClick={toggleMobileMenu}
+          <button 
+            className="md:hidden text-gray-300 hover:text-white transition-colors duration-300"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
+            <svg 
+              className="h-6 w-6" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
             >
-              <svg 
-                className="h-6 w-6" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                {isMobileMenuOpen ? (
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
+              {isMobileMenuOpen ? (
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
         </div>
 
         {/* Mobile Menu */}
@@ -130,7 +132,7 @@ const Navbar = () => {
             >
               <div className="glass-card rounded-xl border border-gray-700/30 p-4">
                 <div className="flex flex-col space-y-3">
-                  {['Protocols', 'Research', 'Community', 'Shop', 'About', 'Contact'].map((item, i) => (
+                  {menuItems.map((item, i) => (
                     <motion.div
                       key={i}
                       initial={{ x: -20, opacity: 0 }}
@@ -139,12 +141,11 @@ const Navbar = () => {
                       className="relative group"
                     >
                       <Link
-                        to={item.toLowerCase() === 'community' ? '/community' : '#'}
+                        to={`/${item.toLowerCase()}`}
                         className="flex items-center space-x-2 text-gray-300 hover:text-white px-4 py-2.5 rounded-lg bg-gray-800/30 backdrop-blur-sm hover:bg-primary-500/10 transition-all duration-300"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         <span className="text-lg font-medium">{item}</span>
-                        <div className="absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-primary-400/50 to-primary-300/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                       </Link>
                     </motion.div>
                   ))}
