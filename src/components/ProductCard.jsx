@@ -1,8 +1,9 @@
+
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useCart } from '../lib/CartContext';
-import { FaStar } from 'react-icons/fa';
+import { FaLeaf, FaShoppingCart } from 'react-icons/fa';
 
 const placeholderImage = "https://placehold.co/600x400/1f2937/e5e7eb?text=Product+Image";
 
@@ -12,20 +13,11 @@ const ProductCard = ({ product, loading }) => {
   const variant = product?.variants?.edges[0]?.node;
   const price = variant?.price;
   const available = variant?.availableForSale;
-  const originalPrice = price ? Number(price.amount) * 1.2 : 0;
-
-  const renderStars = () => {
-    return [...Array(5)].map((_, index) => (
-      <svg key={index} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-      </svg>
-    ));
-  };
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
     if (!available) return;
-
+    
     await addToCart({
       variantId: variant.id,
       title: product.title,
@@ -41,82 +33,99 @@ const ProductCard = ({ product, loading }) => {
   if (loading) {
     return (
       <motion.div 
-        className="bg-white rounded-lg p-4 animate-pulse"
+        className="luxury-card group animate-pulse"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <div className="h-48 bg-gray-200 rounded-lg mb-4"/>
-        <div className="space-y-3">
-          <div className="h-6 bg-gray-200 rounded w-3/4"/>
-          <div className="h-4 bg-gray-200 rounded w-1/2"/>
-          <div className="h-10 bg-gray-200 rounded"/>
+        <div className="h-48 bg-gray-700 rounded-t-xl"/>
+        <div className="p-6 space-y-4">
+          <div className="h-6 bg-gray-700 rounded w-3/4"/>
+          <div className="h-4 bg-gray-700 rounded w-full"/>
+          <div className="h-4 bg-gray-700 rounded w-full"/>
+          <div className="flex justify-between items-center">
+            <div className="h-8 bg-gray-700 rounded w-1/4"/>
+            <div className="h-10 bg-gray-700 rounded w-1/3"/>
+          </div>
         </div>
       </motion.div>
     );
   }
 
-  const oldPrice = Number(price?.amount || 0) * 1.2;
-
   return (
-    <motion.div
-      className="bg-white rounded-xl overflow-hidden flex flex-col h-full"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }}
-    >
-      <Link to={`/product/${product.handle}`} className="flex-grow">
-        <div className="relative bg-sky-100 p-6">
-          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur rounded-full px-3 py-1 text-sm font-medium text-navy-900">
-            FOR {product.productType || 'ALL'}
-          </div>
+    <Link to={`/product/${product.id}`}>
+      <motion.div
+        className="luxury-card group cursor-pointer"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        whileHover={{ scale: 1.03 }}
+      >
+        <div className="relative overflow-hidden rounded-t-xl">
           <img
             src={imageUrl}
             alt={product.title}
-            className="w-full h-64 object-contain"
+            className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+            onError={(e) => e.target.src = placeholderImage}
           />
-        </div>
-
-        <div className="p-6 space-y-4 flex-grow">
-          <h3 className="text-navy-900 font-bold text-xl leading-tight">{product.title}</h3>
-          
-          <div className="flex items-center space-x-1">
-            {renderStars()}
-          </div>
-          
-          <p className="text-gray-600 text-sm line-clamp-2">{product.description}</p>
-
-          <div className="bg-green-50 rounded-lg p-3 flex items-center space-x-2">
-            <span className="text-green-800 text-sm">🎁 FREE Gift With Subscription</span>
-          </div>
-
-          <div className="flex items-baseline space-x-2">
-            <div className="flex items-center space-x-1">
-              <span className="text-sm text-gray-500">From</span>
-              <span className="text-2xl font-bold text-navy-900">
-                ${Number(price?.amount || 0).toFixed(2)}
-              </span>
+          {!available && (
+            <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+              <span className="text-white font-bold text-lg">Sold Out</span>
             </div>
-            <span className="text-gray-500 line-through text-sm">
-              ${originalPrice.toFixed(2)}
-            </span>
-          </div>
-
-          <div className="bg-green-100 rounded-lg p-2 mt-2">
-            <p className="text-emerald-700 text-sm flex items-center">
-              🎁 FREE Gift With Subscription
-            </p>
-          </div>
+          )}
         </div>
-      </Link>
 
-      <button
-        onClick={handleAddToCart}
-        disabled={!available}
-        className="w-full bg-green-700 text-white py-4 font-bold text-lg hover:bg-green-800 transition-colors duration-200"
-      >
-        Shop Now
-      </button>
-    </motion.div>
+        <div className="p-6">
+          <Link 
+            to={`/product/${product.id}`}
+            onClick={(e) => e.stopPropagation()}
+            className="block hover:text-primary-400 transition-colors duration-300"
+          >
+            <h3 className="text-xl font-bold text-white mb-2">{product.title}</h3>
+          </Link>
+          <p className="text-gray-400 mb-4 line-clamp-2">{product.description}</p>
+          <div className="flex justify-between items-center">
+            <span className="text-2xl text-white">
+              {Number(price.amount) === 0 
+                ? 'Free' 
+                : `${Number(price.amount).toFixed(2)} ${price.currencyCode}`}
+            </span>
+            <AnimatePresence>
+              <motion.button
+                onClick={handleAddToCart}
+                className={`luxury-button flex items-center space-x-2 relative overflow-hidden ${!available ? 'opacity-50 cursor-not-allowed' : ''}`}
+                whileHover={available ? { 
+                  scale: 1.05,
+                  boxShadow: "0 0 15px rgba(79, 209, 197, 0.5)"
+                } : {}}
+                whileTap={available ? { 
+                  scale: 0.95,
+                  boxShadow: "0 0 5px rgba(79, 209, 197, 0.3)"
+                } : {}}
+                disabled={!available}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
+                <FaShoppingCart />
+                <span>
+                  {available
+                    ? Number(price.amount) === 0 
+                      ? 'Get for Free'
+                      : 'Add to Cart'
+                    : 'Sold Out'}
+                </span>
+              </motion.button>
+            </AnimatePresence>
+          </div>
+          {available && (
+            <div className="mt-4 flex items-center space-x-2 text-primary-400">
+              <FaLeaf className="text-sm" />
+              <span className="text-sm">In Stock</span>
+            </div>
+          )}
+        </div>
+      </motion.div>
+    </Link>
   );
 };
 
