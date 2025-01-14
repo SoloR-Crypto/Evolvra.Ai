@@ -8,11 +8,6 @@ import { FaLeaf, FaShoppingCart, FaStar } from 'react-icons/fa';
 const placeholderImage = "https://placehold.co/600x400/1f2937/e5e7eb?text=Product+Image";
 
 const ProductCard = ({ product, loading, showGiftBanner = true }) => {
-  const imageUrl = product?.images?.edges[0]?.node?.url || placeholderImage;
-  const variant = product?.variants?.edges[0]?.node;
-  const price = variant?.price;
-  const originalPrice = variant?.compareAtPrice?.amount;
-  const available = variant?.availableForSale;
   const { addToCart } = useCart();
   const imageUrl = product?.images?.edges[0]?.node?.url || placeholderImage;
   const variant = product?.variants?.edges[0]?.node;
@@ -95,14 +90,6 @@ const ProductCard = ({ product, loading, showGiftBanner = true }) => {
           <p className="text-sm text-gray-600 mb-4 line-clamp-2">
             {product.description}
           </p>
-          
-          <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
-          
-          {showGiftBanner && (
-            <div className="bg-green-50 text-green-800 px-4 py-2 rounded-lg flex items-center mb-4">
-              <span className="text-sm">🎁 FREE Gift With Subscription</span>
-            </div>
-          )}
           
           <div className="space-y-4">
             <div className="flex items-baseline gap-2">
