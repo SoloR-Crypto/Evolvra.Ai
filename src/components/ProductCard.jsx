@@ -1,9 +1,8 @@
-
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useCart } from '../lib/CartContext';
-import { FaLeaf, FaShoppingCart } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 
 const placeholderImage = "https://placehold.co/600x400/1f2937/e5e7eb?text=Product+Image";
 
@@ -17,7 +16,7 @@ const ProductCard = ({ product, loading }) => {
   const handleAddToCart = async (e) => {
     e.preventDefault();
     if (!available) return;
-    
+
     await addToCart({
       variantId: variant.id,
       title: product.title,
@@ -33,99 +32,78 @@ const ProductCard = ({ product, loading }) => {
   if (loading) {
     return (
       <motion.div 
-        className="luxury-card group animate-pulse"
+        className="bg-white rounded-lg p-4 animate-pulse"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <div className="h-48 bg-gray-700 rounded-t-xl"/>
-        <div className="p-6 space-y-4">
-          <div className="h-6 bg-gray-700 rounded w-3/4"/>
-          <div className="h-4 bg-gray-700 rounded w-full"/>
-          <div className="h-4 bg-gray-700 rounded w-full"/>
-          <div className="flex justify-between items-center">
-            <div className="h-8 bg-gray-700 rounded w-1/4"/>
-            <div className="h-10 bg-gray-700 rounded w-1/3"/>
-          </div>
+        <div className="h-48 bg-gray-200 rounded-lg mb-4"/>
+        <div className="space-y-3">
+          <div className="h-6 bg-gray-200 rounded w-3/4"/>
+          <div className="h-4 bg-gray-200 rounded w-1/2"/>
+          <div className="h-10 bg-gray-200 rounded"/>
         </div>
       </motion.div>
     );
   }
 
+  const oldPrice = Number(price?.amount || 0) * 1.2;
+
   return (
-    <Link to={`/product/${product.id}`}>
-      <motion.div
-        className="luxury-card group cursor-pointer"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        whileHover={{ scale: 1.03 }}
-      >
-        <div className="relative overflow-hidden rounded-t-xl">
+    <motion.div
+      className="bg-white rounded-lg p-4 flex flex-col h-full"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -5 }}
+    >
+      <Link to={`/product/${product.handle}`} className="flex-grow">
+        <div className="relative mb-4">
           <img
             src={imageUrl}
             alt={product.title}
-            className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-            onError={(e) => e.target.src = placeholderImage}
+            className="w-full h-64 object-contain rounded-lg"
           />
           {!available && (
-            <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/60 flex items-center justify-center rounded-lg">
               <span className="text-white font-bold text-lg">Sold Out</span>
             </div>
           )}
         </div>
 
-        <div className="p-6">
-          <Link 
-            to={`/product/${product.id}`}
-            onClick={(e) => e.stopPropagation()}
-            className="block hover:text-primary-400 transition-colors duration-300"
-          >
-            <h3 className="text-xl font-bold text-white mb-2">{product.title}</h3>
-          </Link>
-          <p className="text-gray-400 mb-4 line-clamp-2">{product.description}</p>
-          <div className="flex justify-between items-center">
-            <span className="text-2xl text-white">
-              {Number(price.amount) === 0 
-                ? 'Free' 
-                : `${Number(price.amount).toFixed(2)} ${price.currencyCode}`}
-            </span>
-            <AnimatePresence>
-              <motion.button
-                onClick={handleAddToCart}
-                className={`luxury-button flex items-center space-x-2 relative overflow-hidden ${!available ? 'opacity-50 cursor-not-allowed' : ''}`}
-                whileHover={available ? { 
-                  scale: 1.05,
-                  boxShadow: "0 0 15px rgba(79, 209, 197, 0.5)"
-                } : {}}
-                whileTap={available ? { 
-                  scale: 0.95,
-                  boxShadow: "0 0 5px rgba(79, 209, 197, 0.3)"
-                } : {}}
-                disabled={!available}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
-                <FaShoppingCart />
-                <span>
-                  {available
-                    ? Number(price.amount) === 0 
-                      ? 'Get for Free'
-                      : 'Add to Cart'
-                    : 'Sold Out'}
-                </span>
-              </motion.button>
-            </AnimatePresence>
+        <div className="space-y-2 flex-grow">
+          <div className="flex items-center space-x-1 text-yellow-400">
+            {[...Array(5)].map((_, i) => (
+              <FaStar key={i} className="text-sm" />
+            ))}
           </div>
-          {available && (
-            <div className="mt-4 flex items-center space-x-2 text-primary-400">
-              <FaLeaf className="text-sm" />
-              <span className="text-sm">In Stock</span>
-            </div>
-          )}
+          <p className="text-sm text-gray-600">FOR {product.productType || 'ALL'}</p>
+          <h3 className="text-navy-900 font-bold text-lg leading-tight">{product.title}</h3>
+          <p className="text-gray-600 text-sm line-clamp-2">{product.description}</p>
+
+          <div className="flex items-baseline space-x-2 mt-4">
+            <span className="text-2xl font-bold text-emerald-700">
+              ${Number(price?.amount || 0).toFixed(2)}
+            </span>
+            <span className="text-gray-500 line-through text-sm">
+              ${oldPrice.toFixed(2)}
+            </span>
+          </div>
+
+          <div className="bg-green-100 rounded-lg p-2 mt-2">
+            <p className="text-emerald-700 text-sm flex items-center">
+              🎁 FREE Gift With Subscription
+            </p>
+          </div>
         </div>
-      </motion.div>
-    </Link>
+      </Link>
+
+      <button
+        onClick={handleAddToCart}
+        disabled={!available}
+        className="w-full mt-4 bg-emerald-600 text-white py-3 rounded-lg font-bold hover:bg-emerald-700 transition-colors duration-200"
+      >
+        Shop Now
+      </button>
+    </motion.div>
   );
 };
 
