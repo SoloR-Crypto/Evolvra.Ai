@@ -3,16 +3,17 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useCart } from '../lib/CartContext';
-import { FaLeaf, FaShoppingCart } from 'react-icons/fa';
+import { FaLeaf, FaShoppingCart, FaStar } from 'react-icons/fa';
 
 const placeholderImage = "https://placehold.co/600x400/1f2937/e5e7eb?text=Product+Image";
 
-const ProductCard = ({ product, loading }) => {
+const ProductCard = ({ product, loading, showGiftBanner = true }) => {
   const { addToCart } = useCart();
   const imageUrl = product?.images?.edges[0]?.node?.url || placeholderImage;
   const variant = product?.variants?.edges[0]?.node;
   const price = variant?.price;
   const available = variant?.availableForSale;
+  const originalPrice = variant?.compareAtPrice?.amount;
 
   const handleAddToCart = async (e) => {
     e.preventDefault();
@@ -54,16 +55,16 @@ const ProductCard = ({ product, loading }) => {
   return (
     <Link to={`/product/${product.id}`}>
       <motion.div
-        className="luxury-card group cursor-pointer"
+        className="luxury-card group cursor-pointer bg-white rounded-lg overflow-hidden shadow-lg"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         whileHover={{ scale: 1.03 }}
       >
-        <div className="relative overflow-hidden rounded-t-xl">
+        <div className="relative overflow-hidden">
           <img
             src={imageUrl}
             alt={product.title}
-            className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-64 object-contain bg-blue-50 p-4"
             onError={(e) => e.target.src = placeholderImage}
           />
           {!available && (
@@ -74,55 +75,49 @@ const ProductCard = ({ product, loading }) => {
         </div>
 
         <div className="p-6">
-          <Link 
-            to={`/product/${product.id}`}
-            onClick={(e) => e.stopPropagation()}
-            className="block hover:text-primary-400 transition-colors duration-300"
-          >
-            <h3 className="text-xl font-bold text-white mb-2">{product.title}</h3>
-          </Link>
-          <p className="text-gray-400 mb-4 line-clamp-2">{product.description}</p>
-          <div className="flex justify-between items-center">
-            <span className="text-2xl text-white">
-              {Number(price.amount) === 0 
-                ? 'Free' 
-                : `${Number(price.amount).toFixed(2)} ${price.currencyCode}`}
-            </span>
-            <AnimatePresence>
-              <motion.button
-                onClick={handleAddToCart}
-                className={`luxury-button flex items-center space-x-2 relative overflow-hidden ${!available ? 'opacity-50 cursor-not-allowed' : ''}`}
-                whileHover={available ? { 
-                  scale: 1.05,
-                  boxShadow: "0 0 15px rgba(79, 209, 197, 0.5)"
-                } : {}}
-                whileTap={available ? { 
-                  scale: 0.95,
-                  boxShadow: "0 0 5px rgba(79, 209, 197, 0.3)"
-                } : {}}
-                disabled={!available}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
-                <FaShoppingCart />
-                <span>
-                  {available
-                    ? Number(price.amount) === 0 
-                      ? 'Get for Free'
-                      : 'Add to Cart'
-                    : 'Sold Out'}
-                </span>
-              </motion.button>
-            </AnimatePresence>
+          <div className="text-xs text-blue-900 uppercase font-semibold mb-2">
+            {product.productType || "For All"}
           </div>
-          {available && (
-            <div className="mt-4 flex items-center space-x-2 text-primary-400">
-              <FaLeaf className="text-sm" />
-              <span className="text-sm">In Stock</span>
+          
+          <h3 className="text-xl font-bold text-blue-900 mb-2">{product.title}</h3>
+          
+          <div className="flex mb-2">
+            {[...Array(5)].map((_, i) => (
+              <FaStar key={i} className="text-yellow-400" />
+            ))}
+          </div>
+          
+          <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
+          
+          {showGiftBanner && (
+            <div className="bg-green-50 text-green-800 px-4 py-2 rounded-lg flex items-center mb-4">
+              <span className="text-sm">🎁 FREE Gift With Subscription</span>
             </div>
           )}
+          
+          <div className="flex justify-between items-center">
+            <div className="flex items-end gap-2">
+              <span className="text-2xl font-bold text-blue-900">
+                ${Number(price.amount).toFixed(2)}
+              </span>
+              {originalPrice && (
+                <span className="text-gray-500 line-through">
+                  ${Number(originalPrice).toFixed(2)}
+                </span>
+              )}
+            </div>
+          </div>
+          
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handleAddToCart(e);
+            }}
+            className="w-full mt-4 bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition-colors"
+            disabled={!available}
+          >
+            Shop Now
+          </button>
         </div>
       </motion.div>
     </Link>
