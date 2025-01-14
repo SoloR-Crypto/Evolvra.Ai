@@ -3,7 +3,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useCart } from '../lib/CartContext';
-import { FaLeaf, FaShoppingCart, FaStar } from 'react-icons/fa';
+import { FaLeaf, FaShoppingCart, FaStar, FaGift } from 'react-icons/fa';
 
 const placeholderImage = "https://placehold.co/600x400/1f2937/e5e7eb?text=Product+Image";
 
@@ -55,7 +55,7 @@ const ProductCard = ({ product, loading, showGiftBanner = true }) => {
   return (
     <Link to={`/product/${product.id}`}>
       <motion.div
-        className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+        className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-700/30"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         whileHover={{ scale: 1.02 }}
@@ -64,60 +64,62 @@ const ProductCard = ({ product, loading, showGiftBanner = true }) => {
           <img
             src={imageUrl}
             alt={product.title}
-            className="w-full h-64 object-contain bg-blue-50 p-4"
+            className="w-full h-64 object-cover transform transition-transform duration-700 hover:scale-110"
             onError={(e) => e.target.src = placeholderImage}
           />
+          {showGiftBanner && (
+            <div className="absolute top-4 right-4 bg-green-500/90 backdrop-blur-sm text-white px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium shadow-lg">
+              <FaGift className="text-white" />
+              FREE Gift with Subscription
+            </div>
+          )}
           {!available && (
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">Sold Out</span>
+              <span className="text-white font-bold text-lg tracking-wider">Sold Out</span>
             </div>
           )}
         </div>
 
-        <div className="p-6">
-          <div className="text-sm text-gray-600 uppercase tracking-wide mb-2">
-            {product.productType || "For All"}
+        <div className="p-6 space-y-4">
+          <div className="text-sm text-primary-400 uppercase tracking-wider font-medium">
+            {product.productType || "Premium Product"}
           </div>
           
-          <h3 className="text-lg font-bold text-gray-900 mb-3">{product.title}</h3>
+          <h3 className="text-xl font-bold text-white tracking-tight leading-tight">
+            {product.title}
+          </h3>
           
-          <div className="flex items-center mb-3">
+          <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <FaStar key={i} className="text-yellow-400 w-4 h-4" />
             ))}
           </div>
           
-          <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+          <p className="text-gray-300 text-sm leading-relaxed line-clamp-2 font-light">
             {product.description}
           </p>
           
-          <div className="space-y-4">
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-gray-900">
+          <div className="space-y-4 pt-2">
+            <div className="flex items-baseline gap-3">
+              <span className="text-2xl font-bold text-white tracking-tight">
                 ${Number(price?.amount || 0).toFixed(2)}
               </span>
               {originalPrice && (
-                <span className="text-sm text-gray-500 line-through">
+                <span className="text-sm text-gray-400 line-through">
                   ${Number(originalPrice).toFixed(2)}
                 </span>
               )}
             </div>
-            
-            {showGiftBanner && (
-              <div className="bg-green-50 text-green-800 text-sm px-3 py-1.5 rounded-md inline-flex items-center gap-1">
-                <span>🎁</span>
-                FREE Gift With Subscription
-              </div>
-            )}
             
             <button
               onClick={(e) => {
                 e.preventDefault();
                 handleAddToCart(e);
               }}
-              className="w-full bg-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-green-700 transition-colors"
+              className="w-full bg-gradient-to-r from-primary-600 to-primary-400 text-white font-medium py-3 px-6 rounded-lg hover:from-primary-500 hover:to-primary-300 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
               disabled={!available}
             >
+              <FaShoppingCart />
               Shop Now
             </button>
           </div>
