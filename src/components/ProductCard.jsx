@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -18,7 +17,7 @@ const ProductCard = ({ product, loading, showGiftBanner = true }) => {
   const handleAddToCart = async (e) => {
     e.preventDefault();
     if (!available) return;
-    
+
     await addToCart({
       variantId: variant.id,
       title: product.title,
@@ -84,21 +83,21 @@ const ProductCard = ({ product, loading, showGiftBanner = true }) => {
           <div className="text-sm text-primary-400 uppercase tracking-wider font-medium">
             {product.productType || "Premium Product"}
           </div>
-          
+
           <h3 className="text-xl font-bold text-white tracking-tight leading-tight">
             {product.title}
           </h3>
-          
+
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <FaStar key={i} className="text-yellow-400 w-4 h-4" />
             ))}
           </div>
-          
+
           <p className="text-gray-300 text-sm leading-relaxed line-clamp-2 font-light">
             {product.description}
           </p>
-          
+
           <div className="space-y-4 pt-2">
             <div className="flex items-baseline gap-3">
               <span className="text-2xl font-bold text-white tracking-tight">
@@ -110,17 +109,17 @@ const ProductCard = ({ product, loading, showGiftBanner = true }) => {
                 </span>
               )}
             </div>
-            
+
             <button
               onClick={(e) => {
                 e.preventDefault();
                 handleAddToCart(e);
               }}
-              className="w-full bg-gradient-to-r from-primary-600 to-primary-400 text-white font-medium py-3 px-6 rounded-lg hover:from-primary-500 hover:to-primary-300 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
+              className="shop-button flex items-center justify-center gap-2"
               disabled={!available}
             >
-              <FaShoppingCart />
-              Shop Now
+              <FaShoppingCart className="text-lg" />
+              <span>Shop Now</span>
             </button>
           </div>
         </div>
