@@ -127,8 +127,8 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 pt-24 pb-12">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="min-h-screen bg-white pt-24 pb-12">
+      <div className="max-w-6xl mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -169,23 +169,39 @@ const ProductPage = () => {
           </div>
 
           {/* Product Info */}
-          <div className="space-y-8">
-            <div>
-              <motion.h1 
-                className="text-4xl font-bold text-white mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                {product.title}
-              </motion.h1>
-              <motion.p 
-                className="text-3xl text-primary-400"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                {Number(variant.price.amount).toFixed(2)} {variant.price.currencyCode}
-              </motion.p>
+          <div className="space-y-6">
+            <div className="text-sm text-navy-600">FOR {product.productType || 'ALL'}</div>
+            <motion.h1 
+              className="text-3xl font-bold text-navy-900"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              {product.title}
+            </motion.h1>
+            
+            <div className="flex items-center space-x-1 text-yellow-400">
+              {[...Array(5)].map((_, i) => (
+                <FaStar key={i} className="text-sm" />
+              ))}
+            </div>
+
+            <motion.div 
+              className="flex items-baseline space-x-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <span className="text-3xl font-bold text-emerald-700">
+                ${Number(variant.price.amount).toFixed(2)} {variant.price.currencyCode}
+              </span>
+              <span className="text-gray-500 line-through text-lg">
+                ${(Number(variant.price.amount) * 1.2).toFixed(2)}
+              </span>
+            </motion.div>
+
+            <div className="bg-green-50 rounded-lg p-3 inline-block">
+              <p className="text-emerald-700 text-sm flex items-center">
+                🎁 FREE Gift With Subscription
+              </p>
             </div>
 
             <motion.div 
@@ -221,24 +237,14 @@ const ProductPage = () => {
             </motion.div>
 
             <motion.button
-              className="w-full luxury-button py-4 text-lg flex items-center justify-center space-x-3 relative overflow-hidden group"
+              className="w-full bg-emerald-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-emerald-700 transition-colors duration-200"
               onClick={handleAddToCart}
               disabled={!variant.availableForSale}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              whileHover={{ 
-                scale: 1.02,
-                boxShadow: "0 0 20px rgba(79, 209, 197, 0.5)"
-              }}
-              whileTap={{ 
-                scale: 0.98,
-                boxShadow: "0 0 10px rgba(79, 209, 197, 0.3)"
-              }}
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-transparent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
-              <FaShoppingCart className="text-xl" />
-              <span>{variant.availableForSale ? 'Add to Cart' : 'Sold Out'}</span>
+              Shop Now
             </motion.button>
 
             <motion.div 
