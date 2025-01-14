@@ -60,9 +60,9 @@ const ProductCard = ({ product, loading }) => {
               ${oldPrice.toFixed(2)}
             </span>
           </div>
-          <div className="bg-green-50 rounded-lg p-2 mb-4">
-            <p className="text-emerald-700 text-sm flex items-center">
-              🎁 FREE Gift With Subscription
+          <div className="bg-emerald-600 text-white rounded-lg p-3 w-full text-center mb-4 transform -rotate-2">
+            <p className="text-sm font-bold flex items-center justify-center gap-2">
+              <span className="text-lg">🎁</span> FREE Gift With Subscription
             </p>
           </div>
           <button
